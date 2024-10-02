@@ -19,42 +19,43 @@ public class User {
         this.password = password;
     }
 
+
     public void createAccount() {
-            String userName = tryCatch.TryCatchUsername();
-            String password = tryCatch.TryCatchPassword();
-
-            users.put("1", new User(userName, password));
-
+        String userName = tryCatch.TryCatchUsername(); // var mycket lättare att implemetera 2 trycatch istället för 1
+        String password = tryCatch.TryCatchPassword();
+        users.put("1", new User(userName, password)); // fixa så att 1an uppdateras med +1 varjegång vi skapar en ny user -
+        // genom att kolla om 1 redan finns
         displayAccounts();
-        }
+    }
 
 
-public void displayAccounts() {
-        for ( User user : users.values()) {
+    public void displayAccounts() {
+        for (User user : users.values()) {
             System.out.println(user);
             System.out.println();
         }
-}
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
     @Override
     public String toString() {
-        return "\nUser\n" + " - Username: " + userName + "\n - Password: " + password + "\n_________________________________";
-    }
+        return "\nUser\n" + " - Username: " + userName + "\n - Password: " + password + "\n_________________________________";}
 
-    public String getUserName() {
-        return userName;
-    }
-
-    public void setUserName(String userName) {
-        this.userName = userName;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
+    public String getUserName() {return userName;}
+    public void setUserName(String userName) {this.userName = userName;}
+    public String getPassword() {return password;}
+    public void setPassword(String password) {this.password = password;}
 }

@@ -6,7 +6,9 @@ public class Main_BudgetTracker {
         User userMethods = new User("", ""); // för att få in metoderna
 
 
-        System.out.println("Menu\n1. Create a new account\n2. Login\n3. Exit");
+
+        //while loop så länge man är inloggad
+        System.out.println("Menu\n1. Create a new account\n2. Login\n3. Logout");
 
         int startMenu = tryCatch.TryCatch1();
 
