@@ -1,38 +1,60 @@
 package BudgetApp;
 
+import java.util.HashMap;
+
 public class User {
 
-    private String name;
-    private String lastName;
+   // private String name;
+   // private String lastName; // FRÅGA HELENA
     private String userName; // optional
     private String password; // optional ifall vi lägger till logga in
 
-    public User(String name, String lastName, String userName, String password) {
-        this.name = name;
-        this.lastName = lastName;
+    TryCatch tryCatch = new TryCatch();
+
+    HashMap<String, User> users = new HashMap<>();
+
+
+    public User(String userName, String password) { // vill jag skapa en ny lista varje gång ??? vill jag ha accounts listan i konstruktorn???
         this.userName = userName;
         this.password = password;
     }
 
+    public void createAccount() {
+            String userName = tryCatch.TryCatchUsername();
+            String password = tryCatch.TryCatchPassword();
+
+            users.put("1", new User(userName, password));
+
+        displayAccounts();
+        }
 
 
+public void displayAccounts() {
+        for ( User user : users.values()) {
+            System.out.println(user);
+            System.out.println();
+        }
+}
 
 
+    @Override
+    public String toString() {
+        return "\nUser\n" + " - Username: " + userName + "\n - Password: " + password + "\n_________________________________";
+    }
 
+    public String getUserName() {
+        return userName;
+    }
 
+    public void setUserName(String userName) {
+        this.userName = userName;
+    }
 
+    public String getPassword() {
+        return password;
+    }
 
-
-
-
-
-
-    public String getName() {return name;}
-    public void setName(String name) {this.name = name;}
-    public String getLastName() {return lastName;}
-    public void setLastName(String lastName) {this.lastName = lastName;}
-    public String getUserName() {return userName;}
-    public void setUserName(String userName) {this.userName = userName;}
-    public String getPassword() {return password;}
-    public void setPassword(String password) {this.password = password;}
+    public void setPassword(String password) {
+        this.password = password;
+    }
 }

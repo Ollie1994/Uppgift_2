@@ -2,6 +2,19 @@ package BudgetApp;
 
 public class Main_BudgetTracker {
     public static void main(String[] args) {
+        TryCatch tryCatch = new TryCatch();
+        User userMethods = new User("", ""); // för att få in metoderna
+
+
+        System.out.println("Menu\n1. Create a new account\n2. Login\n3. Exit");
+
+        int startMenu = tryCatch.TryCatch1();
+
+        switch (startMenu) {
+            case 1 -> userMethods.createAccount();
+            //case 2 ->
+            //case 3 ->
+        }
 
         /* I programmet ska du kunna:
          - Lägga till en eller flera utgifter och lägga till en eller flera inkomster
