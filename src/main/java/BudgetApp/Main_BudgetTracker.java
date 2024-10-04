@@ -3,21 +3,36 @@ package BudgetApp;
 public class Main_BudgetTracker {
     public static void main(String[] args) {
         TryCatch tryCatch = new TryCatch();
-        User userMethods = new User("", ""); // för att få in metoderna
+        UserServiceClass userServiceClass = new UserServiceClass();
 
 
+        boolean loggedIn = false;
+        while (loggedIn == false) {
+            System.out.println("Start Menu\n1. Create a new account\n2. Login\n3. Exit");
+            int startMenu = tryCatch.TryCatch1();
+            switch (startMenu) {
+                case 1:
+                    userServiceClass.createAccount();
+                    break;
+                case 2:
+                    loggedIn = userServiceClass.login();
+                    System.out.println(loggedIn);
+                    break;
 
-        //while loop så länge man är inloggad
-        System.out.println("Menu\n1. Create a new account\n2. Login\n3. Logout");
-
-        int startMenu = tryCatch.TryCatch1();
-
-        switch (startMenu) {
-            case 1 -> userMethods.createAccount();
-            //case 2 ->
-            //case 3 ->
+                //case 3 ->
+            }
         }
+        //while loop så länge man är inloggad
 
+
+        //MENY 2
+        System.out.println("MainMenu\n 1. Display all accounts (test val)");
+        int mainMenu = tryCatch.TryCatch1();
+        switch (mainMenu) {
+            case 1 -> userServiceClass.displayAccounts();
+
+
+        }
         /* I programmet ska du kunna:
          - Lägga till en eller flera utgifter och lägga till en eller flera inkomster
          - Dina inkomster och utgifter ska sparas till en fil i formatet JSON.

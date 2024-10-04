@@ -21,28 +21,18 @@ public class TryCatch {
         }
         return answer1;
     }
-    public String TryCatchUsername() {
-        String userName = "";
+    public String TryCatch2() { // polymorthism - en metod till create account - username, password  och login - usernama, password
+        String input = "";
             try {
                 Scanner sc = new Scanner(System.in);
-                System.out.println("Enter a username");
-                userName = sc.next();
+                System.out.println("Input please");
+                input = sc.next();
             } catch (Exception e) {System.out.println("Invalid input!");
             } finally {
             }
-            return userName;
+            return input;
     }
-    public String TryCatchPassword() {
-        String password = "";
-        try {
-            Scanner sc = new Scanner(System.in);
-            System.out.println("Enter a password");
-            password = sc.next();
-        } catch (Exception e) {System.out.println("Invalid input!");
-        } finally {
-        }
-        return password;
-    }
+
 
 
 
