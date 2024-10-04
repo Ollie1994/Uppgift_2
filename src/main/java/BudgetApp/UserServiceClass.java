@@ -1,3 +1,5 @@
+// https://stackoverflow.com/questions/60592071/how-to-use-dates-as-keys-in-a-hashmap
+// https://www.geeksforgeeks.org/java-time-localdatetime-class-in-java/
 package BudgetApp;
 
 import java.util.HashMap;
@@ -7,6 +9,16 @@ public class UserServiceClass {
     TryCatch tryCatch = new TryCatch();
     HashMap<String, User> users = new HashMap<>();
 
+
+
+
+
+
+
+
+
+
+    //-----------------------------------------------METHODS--------------------------------------------
     public void createAccount() {
         System.out.println("Please enter a username: ");
         String userName = tryCatch.TryCatch2();
@@ -15,9 +27,10 @@ public class UserServiceClass {
         users.put("1", new User(userName, password)); // fixa så att 1an uppdateras med +1 varjegång vi skapar en ny user -
         // genom att kolla om 1 redan finns
         System.out.println("You have successfully created a new account with username " + userName + " and password " + password);
-
        // displayAccounts(); //ta bort sen
     }
+
+
     public boolean login() {
         int i = 0;
         boolean loggedIn = false;
@@ -38,11 +51,6 @@ public class UserServiceClass {
         }
         return loggedIn;
     }
-
-
-
-
-
 
     public void displayAccounts() {
         for (User user : users.values()) {
