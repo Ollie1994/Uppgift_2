@@ -8,10 +8,10 @@ package BudgetApp;
 import java.time.LocalDateTime;
 import java.util.HashMap;
 
-public class User_ServiceClass {
+public class User_Sc {
 
-    TryCatch_MethodClass tryCatch = new TryCatch_MethodClass();
-    HashMap<LocalDateTime, User_TemplateClass> users = new HashMap<LocalDateTime, User_TemplateClass>();
+    TryCatch_Mc tryCatch_Mc = new TryCatch_Mc();
+    HashMap<LocalDateTime, User_Tc> users = new HashMap<LocalDateTime, User_Tc>();
 
 
 
@@ -25,10 +25,10 @@ public class User_ServiceClass {
     //-----------------------------------------------METHODS--------------------------------------------
     public void createAccount() {
         System.out.println("Please enter a username: ");
-        String userName = tryCatch.TryCatch2();
+        String userName = tryCatch_Mc.TryCatch2();
         System.out.println("Please enter a password: ");
-        String password = tryCatch.TryCatch2();
-        users.put(LocalDateTime.now(), new User_TemplateClass(userName, password)); // fixa så att 1an uppdateras med +1 varjegång vi skapar en ny user -
+        String password = tryCatch_Mc.TryCatch2();
+        users.put(LocalDateTime.now(), new User_Tc(userName, password)); // fixa så att 1an uppdateras med +1 varjegång vi skapar en ny user -
         System.out.println("You have successfully created a new account with username " + userName + " and password " + password);
     }
 
@@ -39,10 +39,10 @@ public class User_ServiceClass {
         while (i < 3 && loggedIn == false) { // 3 test logins tills ool
             i ++;
             System.out.println("Please enter your username");
-            String userName = tryCatch.TryCatch2();
+            String userName = tryCatch_Mc.TryCatch2();
             System.out.println("Please enter your password");
-            String password = tryCatch.TryCatch2();
-            for (User_TemplateClass userTemplateClass : users.values()) {
+            String password = tryCatch_Mc.TryCatch2();
+            for (User_Tc userTemplateClass : users.values()) {
                 if (userName.equals(userTemplateClass.getUserName()) && password.equals(userTemplateClass.getPassword())) {
                     System.out.println("You have successfully logged in!");
                      loggedIn = true;
@@ -55,7 +55,7 @@ public class User_ServiceClass {
 
     public void displayAccounts() {
         for (LocalDateTime i : users.keySet()) {
-            System.out.println("User_TemplateClass\nKey - " + i + "\nUser_TemplateClass - " + users.get(i));
+            System.out.println("User_Tc\nKey - " + i + "\nUser_Tc - " + users.get(i));
         }
     }
 

@@ -1,6 +1,6 @@
 package BudgetApp;
 // https://familybudgetexpert.com/budget-categories/#Income
-public enum ExpenseCategory_EnumClass {
+public enum ExpenseCategory_Ec {
     HOUSING, HOMESERVICES, UTILITIES, HOUSEHOLDITEMS,
     FOOD, TRANSPORTATION, MEDICAL, INSURANCE, KIDS, PETS,
     SUBSCRIPTIONS, CLOTHING, PERSONALCARE, PERSONALDEVELOPMENT,

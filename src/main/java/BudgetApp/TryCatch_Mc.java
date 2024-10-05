@@ -4,7 +4,7 @@ import java.util.Scanner;
 
 // att ha tryCatchen i en egen klass gör det mycket lättare att återanvända kod-
 // och gör det lättare att hålla main så ren som möjligt.
-public class TryCatch_MethodClass {
+public class TryCatch_Mc {
 
     public int TryCatch1() {
         int answer1 = 0;

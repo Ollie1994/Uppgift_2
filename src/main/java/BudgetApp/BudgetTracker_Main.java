@@ -1,21 +1,21 @@
 package BudgetApp;
 
-public class BudgetTracker_MainClass {
+public class BudgetTracker_Main {
     public static void main(String[] args) {
-        TryCatch_MethodClass tryCatch = new TryCatch_MethodClass();
-        User_ServiceClass userServiceClass = new User_ServiceClass();
+        TryCatch_Mc tryCatch_Mc = new TryCatch_Mc();
+        User_Sc user_Sc = new User_Sc();
 
 
         boolean loggedIn = false;
         while (loggedIn == false) {
             System.out.println("Start Menu\n1. Create a new account\n2. Login\n3. Exit");
-            int startMenu = tryCatch.TryCatch1();
+            int startMenu = tryCatch_Mc.TryCatch1();
             switch (startMenu) {
                 case 1:
-                    userServiceClass.createAccount();
+                    user_Sc.createAccount();
                     break;
                 case 2:
-                    loggedIn = userServiceClass.login();
+                    loggedIn = user_Sc.login();
                     System.out.println(loggedIn); // test ta bort sen
                     break;
 
@@ -27,9 +27,9 @@ public class BudgetTracker_MainClass {
         while (loggedIn == true) {
         //MENY 2
             System.out.println("YOU ARE LOGGED IN!\nMainMenu\n1. Display all accounts (test val)\n2.     \n3. EXIT!");
-            int mainMenu = tryCatch.TryCatch1();
+            int mainMenu = tryCatch_Mc.TryCatch1();
             switch (mainMenu) {
-                case 1 -> userServiceClass.displayAccounts(); // bara för test
+                case 1 -> user_Sc.displayAccounts(); // bara för test
                 //case 2 ->
                 case 3 -> loggedIn = false; // istället för EXIT så loopar vi runt till början igen genom att logga ut?
             }
