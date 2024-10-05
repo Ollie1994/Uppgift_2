@@ -16,7 +16,7 @@ public class Main_BudgetTracker {
                     break;
                 case 2:
                     loggedIn = userServiceClass.login();
-                    System.out.println(loggedIn);
+                    System.out.println(loggedIn); // test ta bort sen
                     break;
 
                 //case 3 ->
@@ -26,7 +26,7 @@ public class Main_BudgetTracker {
 
 
         //MENY 2
-        System.out.println("MainMenu\n 1. Display all accounts (test val)");
+        System.out.println("YOU ARE LOGGED IN!\nMainMenu\n 1. Display all accounts (test val)");
         int mainMenu = tryCatch.TryCatch1();
         switch (mainMenu) {
             case 1 -> userServiceClass.displayAccounts();

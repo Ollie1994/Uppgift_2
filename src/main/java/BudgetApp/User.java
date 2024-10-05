@@ -19,7 +19,8 @@ public class User {
 
     @Override
     public String toString() {
-        return "\nUser\n" + " - Username: " + userName + "\n - Password: " + password + "\n_________________________________";}
+        return "Username: " + userName  + ", Password: " +  password + "\n" + "________________________________________________\n";
+    }
 
     public String getUserName() {return userName;}
     public void setUserName(String userName) {this.userName = userName;}

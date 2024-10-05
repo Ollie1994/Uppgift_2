@@ -1,13 +1,17 @@
 // https://stackoverflow.com/questions/60592071/how-to-use-dates-as-keys-in-a-hashmap
 // https://www.geeksforgeeks.org/java-time-localdatetime-class-in-java/
+// https://www.w3schools.com/java/java_howto_loop_through_hashmap.asp
+
+
 package BudgetApp;
 
+import java.time.LocalDateTime;
 import java.util.HashMap;
 
 public class UserServiceClass {
 
     TryCatch tryCatch = new TryCatch();
-    HashMap<String, User> users = new HashMap<>();
+    HashMap<LocalDateTime, User> users = new HashMap<LocalDateTime, User>();
 
 
 
@@ -24,10 +28,8 @@ public class UserServiceClass {
         String userName = tryCatch.TryCatch2();
         System.out.println("Please enter a password: ");
         String password = tryCatch.TryCatch2();
-        users.put("1", new User(userName, password)); // fixa så att 1an uppdateras med +1 varjegång vi skapar en ny user -
-        // genom att kolla om 1 redan finns
+        users.put(LocalDateTime.now(), new User(userName, password)); // fixa så att 1an uppdateras med +1 varjegång vi skapar en ny user -
         System.out.println("You have successfully created a new account with username " + userName + " and password " + password);
-       // displayAccounts(); //ta bort sen
     }
 
 
@@ -36,25 +38,24 @@ public class UserServiceClass {
         boolean loggedIn = false;
         while (i < 3 && loggedIn == false) { // 3 test logins tills ool
             i ++;
-            System.out.println("please enter username");
+            System.out.println("Please enter your username");
             String userName = tryCatch.TryCatch2();
-            System.out.println("please enter password");
+            System.out.println("Please enter your password");
             String password = tryCatch.TryCatch2();
             for (User user : users.values()) {
                 if (userName.equals(user.getUserName()) && password.equals(user.getPassword())) {
                     System.out.println("You have successfully logged in!");
                      loggedIn = true;
-                } else {
-                    System.out.println("You have unsuccessfully logged in!");
                 }
             }
         }
+        if (loggedIn == false) {System.out.println("You have not successfully logged in!");}
         return loggedIn;
     }
 
     public void displayAccounts() {
-        for (User user : users.values()) {
-            System.out.println(user);
+        for (LocalDateTime i : users.keySet()) {
+            System.out.println("User\nKey - " + i + "\nUser - " + users.get(i));
         }
     }
 
