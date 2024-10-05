@@ -12,7 +12,8 @@ public class Expense_Tc extends Transaction_Tc {
     }
 
 
-
+        // Skapa en metod för att displaya alla expenses (osv) som overrider från transaction
+        // "så samma metod men tar med all ifrån trans och expense" osv
 
     public ExpenseCategory_Ec getCategory() {return category;}
     public void setCategory(ExpenseCategory_Ec category) {this.category = category;}
