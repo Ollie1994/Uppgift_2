@@ -1,12 +1,12 @@
 package BudgetApp;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 public class Income extends Transaction {
 
     private IncomeCategory category;
 
-    public Income(double amount, LocalDate date, IncomeCategory category) {
+    public Income(double amount, LocalDateTime date, IncomeCategory category) {
         super(amount, date);
         this.category = category;
     }

@@ -1,13 +1,13 @@
 package BudgetApp;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 public class Transaction {
 
     private double amount;
-    private LocalDate date;
+    private LocalDateTime date;
 
-    public Transaction(double amount, LocalDate date) {
+    public Transaction(double amount, LocalDateTime date) {
         this.amount = amount;
         this.date = date;
         //lägga till mer här ? tex if august save in august ?
@@ -24,6 +24,6 @@ public class Transaction {
 
     public double getAmount() {return amount;}
     public void setAmount(double amount) {this.amount = amount;}
-    public LocalDate getDate() {return date;}
-    public void setDate(LocalDate date) {this.date = date;}
+    public LocalDateTime getDate() {return date;}
+    public void setDate(LocalDateTime date) {this.date = date;}
 }
