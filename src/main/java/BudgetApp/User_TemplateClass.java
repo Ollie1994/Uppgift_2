@@ -1,6 +1,6 @@
 package BudgetApp;
 
-public class User {
+public class User_TemplateClass {
 
    // private String name;
    // private String lastName; // FRÅGA HELENA
@@ -10,7 +10,7 @@ public class User {
 
 
 
-    public User(String userName, String password) { // vill jag skapa en ny lista varje gång ??? vill jag ha accounts listan i konstruktorn???
+    public User_TemplateClass(String userName, String password) { // vill jag skapa en ny lista varje gång ??? vill jag ha accounts listan i konstruktorn???
         this.userName = userName;
         this.password = password;
     }

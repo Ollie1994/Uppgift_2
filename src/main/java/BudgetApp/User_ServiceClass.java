@@ -8,10 +8,10 @@ package BudgetApp;
 import java.time.LocalDateTime;
 import java.util.HashMap;
 
-public class UserServiceClass {
+public class User_ServiceClass {
 
-    TryCatch tryCatch = new TryCatch();
-    HashMap<LocalDateTime, User> users = new HashMap<LocalDateTime, User>();
+    TryCatch_MethodClass tryCatch = new TryCatch_MethodClass();
+    HashMap<LocalDateTime, User_TemplateClass> users = new HashMap<LocalDateTime, User_TemplateClass>();
 
 
 
@@ -28,7 +28,7 @@ public class UserServiceClass {
         String userName = tryCatch.TryCatch2();
         System.out.println("Please enter a password: ");
         String password = tryCatch.TryCatch2();
-        users.put(LocalDateTime.now(), new User(userName, password)); // fixa så att 1an uppdateras med +1 varjegång vi skapar en ny user -
+        users.put(LocalDateTime.now(), new User_TemplateClass(userName, password)); // fixa så att 1an uppdateras med +1 varjegång vi skapar en ny user -
         System.out.println("You have successfully created a new account with username " + userName + " and password " + password);
     }
 
@@ -42,8 +42,8 @@ public class UserServiceClass {
             String userName = tryCatch.TryCatch2();
             System.out.println("Please enter your password");
             String password = tryCatch.TryCatch2();
-            for (User user : users.values()) {
-                if (userName.equals(user.getUserName()) && password.equals(user.getPassword())) {
+            for (User_TemplateClass userTemplateClass : users.values()) {
+                if (userName.equals(userTemplateClass.getUserName()) && password.equals(userTemplateClass.getPassword())) {
                     System.out.println("You have successfully logged in!");
                      loggedIn = true;
                 }
@@ -55,7 +55,7 @@ public class UserServiceClass {
 
     public void displayAccounts() {
         for (LocalDateTime i : users.keySet()) {
-            System.out.println("User\nKey - " + i + "\nUser - " + users.get(i));
+            System.out.println("User_TemplateClass\nKey - " + i + "\nUser_TemplateClass - " + users.get(i));
         }
     }
 

@@ -1,9 +1,9 @@
 package BudgetApp;
 
-public class Main_BudgetTracker {
+public class BudgetTracker_MainClass {
     public static void main(String[] args) {
-        TryCatch tryCatch = new TryCatch();
-        UserServiceClass userServiceClass = new UserServiceClass();
+        TryCatch_MethodClass tryCatch = new TryCatch_MethodClass();
+        User_ServiceClass userServiceClass = new User_ServiceClass();
 
 
         boolean loggedIn = false;
@@ -24,13 +24,15 @@ public class Main_BudgetTracker {
         }
         //while loop så länge man är inloggad
 
-
+        while (loggedIn == true) {
         //MENY 2
-        System.out.println("YOU ARE LOGGED IN!\nMainMenu\n 1. Display all accounts (test val)");
-        int mainMenu = tryCatch.TryCatch1();
-        switch (mainMenu) {
-            case 1 -> userServiceClass.displayAccounts();
-
+            System.out.println("YOU ARE LOGGED IN!\nMainMenu\n1. Display all accounts (test val)\n2.     \n3. EXIT!");
+            int mainMenu = tryCatch.TryCatch1();
+            switch (mainMenu) {
+                case 1 -> userServiceClass.displayAccounts(); // bara för test
+                //case 2 ->
+                case 3 -> loggedIn = false; // istället för EXIT så loopar vi runt till början igen genom att logga ut?
+            }
 
         }
         /* I programmet ska du kunna:
