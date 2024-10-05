@@ -4,6 +4,7 @@ public class BudgetTracker_Main {
     public static void main(String[] args) {
         TryCatch_Mc tryCatch_Mc = new TryCatch_Mc();
         User_Sc user_Sc = new User_Sc();
+        ExpenseStorage_Sc expenseStorage_Sc = new ExpenseStorage_Sc();
 
 
         boolean loggedIn = false;
@@ -32,7 +33,7 @@ public class BudgetTracker_Main {
             switch (mainMenu) {
                 case 1 -> user_Sc.displayAccounts(); // bara för test
                 case 2 -> loggedIn = false; // istället för EXIT så loopar vi runt till början igen genom att logga ut?
-                //case 3 ->
+                case 3 -> expenseStorage_Sc.createExpense();
 
 
             }

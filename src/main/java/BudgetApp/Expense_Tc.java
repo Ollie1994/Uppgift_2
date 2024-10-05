@@ -14,8 +14,6 @@ public class Expense_Tc extends Transaction_Tc {
 
 
 
-
-
     public ExpenseCategory_Ec getCategory() {return category;}
     public void setCategory(ExpenseCategory_Ec category) {this.category = category;}
 }

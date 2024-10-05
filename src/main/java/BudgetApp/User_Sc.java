@@ -55,7 +55,7 @@ public class User_Sc {
 
     public void displayAccounts() {
         for (LocalDateTime i : users.keySet()) {
-            System.out.println("User_Tc\nKey - " + i + "\nUser_Tc - " + users.get(i));
+            System.out.println("User\nKey - " + i + "\nUser - " + users.get(i));
         }
     }
 
