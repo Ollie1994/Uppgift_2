@@ -26,12 +26,15 @@ public class BudgetTracker_Main {
 
         while (loggedIn == true) {
         //MENY 2
-            System.out.println("YOU ARE LOGGED IN!\nMainMenu\n1. Display all accounts (test val)\n2.     \n3. EXIT!");
-            int mainMenu = tryCatch_Mc.TryCatch1();
+            System.out.println("YOU ARE LOGGED IN!\nMain Menu\n1. Display all accounts (test val)\n2. EXIT!" +
+            "\n3. Add an expense\n4. Add an income\n5. ");
+            int mainMenu = tryCatch_Mc.TryCatch1(); // skicka in något här som ändra trycatchen till att tilåta flera val
             switch (mainMenu) {
                 case 1 -> user_Sc.displayAccounts(); // bara för test
-                //case 2 ->
-                case 3 -> loggedIn = false; // istället för EXIT så loopar vi runt till början igen genom att logga ut?
+                case 2 -> loggedIn = false; // istället för EXIT så loopar vi runt till början igen genom att logga ut?
+                //case 3 ->
+
+
             }
 
         }
