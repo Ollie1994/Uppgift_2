@@ -1,4 +1,6 @@
 package BudgetApp;
+// https://stackoverflow.com/questions/43117731/what-is-type-typetoken
+// https://www.javadoc.io/doc/com.google.code.gson/gson/2.6.2/com/google/gson/reflect/TypeToken.html
 
 import java.time.LocalDateTime;
 import java.util.HashMap;
