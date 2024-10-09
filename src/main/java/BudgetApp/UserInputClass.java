@@ -4,9 +4,9 @@ import java.util.Scanner;
 
 // att ha tryCatchen i en egen klass gör det mycket lättare att återanvända kod-
 // och gör det lättare att hålla main så ren som möjligt.
-public class TryCatch_Mc {
+public class UserInputClass {
 
-    public int TryCatch1() {
+    public int inputStartMenuChoice() {
         int input = 0;
         while (input <= 0 || input > 3) {
             try {
@@ -23,7 +23,7 @@ public class TryCatch_Mc {
         return input;
     }
 
-    public String TryCatch2() { // polymorthism - en metod till create account - username, password  och login - usernama, password
+    public String inputUsernamePasswordChoice() {
         String input = "";
             try {
                 Scanner sc = new Scanner(System.in);
@@ -36,7 +36,7 @@ public class TryCatch_Mc {
             return input;
     }
 
-    public double TryCatch3() {
+    public double inputAmountChoice() {
         double input = 0;
         while (input <= 0 || input >= Double.MAX_VALUE) {
             try {
@@ -53,10 +53,10 @@ public class TryCatch_Mc {
         return input;
     }
 
-    public String TryCatch4() { // pollyshofräs eftesom den används till både expense och income
+    public String inputEnumCategoryChoice() {
         Scanner sc = new Scanner(System.in);
-        ExpenseCategory_Ec category_exCa;
-        IncomeCategory_Ec category_inCa;
+        ExpenseCategory category_exCa;
+        IncomeCategory category_inCa;
         String finalCategory = null;
         while (finalCategory == null) {
             try {
@@ -64,26 +64,26 @@ public class TryCatch_Mc {
                 String choice = sc.next();
                 switch (choice) {
                     case "expense":
-                        for (ExpenseCategory_Ec category : ExpenseCategory_Ec.values()) {
+                        for (ExpenseCategory category : ExpenseCategory.values()) {
                             System.out.println(category);
                         }
                         System.out.println("Please enter the expense category");
-                        category_exCa = ExpenseCategory_Ec.valueOf(sc.next());
+                        category_exCa = ExpenseCategory.valueOf(sc.next());
                         finalCategory = String.valueOf(category_exCa); // föreslog wrap så vi testar det
                         break;
                     case "income":
-                        for (IncomeCategory_Ec category : IncomeCategory_Ec.values()) {
+                        for (IncomeCategory category : IncomeCategory.values()) {
                             System.out.println(category);
                         }
                         System.out.println("Please enter the income category");
-                        category_inCa = IncomeCategory_Ec.valueOf(sc.next());
+                        category_inCa = IncomeCategory.valueOf(sc.next());
                         finalCategory = String.valueOf(category_inCa);
                         break;
                     default:
-                        System.out.println("Invalid input!");
+                        System.out.println("Invalid inputUsernamePasswordChoice!");
                 }
             } catch (Exception e) {
-                System.out.println("Invalid input!");
+                System.out.println("Invalid inputUsernamePasswordChoice!");
             } finally {
 
             }

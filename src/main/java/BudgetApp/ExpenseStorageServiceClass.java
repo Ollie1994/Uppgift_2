@@ -1,13 +1,13 @@
 package BudgetApp;
 // https://stackoverflow.com/questions/43117731/what-is-type-typetoken
 // https://www.javadoc.io/doc/com.google.code.gson/gson/2.6.2/com/google/gson/reflect/TypeToken.html
-
+// https://bito.ai/resources/java-localdatetime-to-string-java-explained/#5
 import java.time.LocalDateTime;
 import java.util.HashMap;
 
-public class ExpenseStorage_Sc {
-    TryCatch_Mc tryCatch_Mc = new TryCatch_Mc();
-    HashMap<LocalDateTime, Expense_Tc> expenses = new HashMap<LocalDateTime, Expense_Tc>();
+public class ExpenseStorageServiceClass {
+    UserInputClass userInputClass = new UserInputClass();
+    HashMap<LocalDateTime, Expense> expenses = new HashMap<LocalDateTime, Expense>();
 
     /* expense:
     - Amount, date, category
@@ -15,11 +15,11 @@ public class ExpenseStorage_Sc {
      */
     public void createExpense() {
         System.out.println("Pick a category");
-        ExpenseCategory_Ec category = ExpenseCategory_Ec.valueOf(tryCatch_Mc.TryCatch4()); // byt till annan tC
+        ExpenseCategory category = ExpenseCategory.valueOf(userInputClass.inputEnumCategoryChoice()); // byt till annan tC
         System.out.println("Please enter an amount: ");
-        double amount = tryCatch_Mc.TryCatch3();
+        double amount = userInputClass.inputAmountChoice();
         LocalDateTime date = LocalDateTime.now();
-        expenses.put(LocalDateTime.now(), new Expense_Tc(amount, date, category));
+        expenses.put(LocalDateTime.now(), new Expense(amount, date, category));
         System.out.println("New " + category + " expense has been created\n For: " + amount + ".Kr\n Date: " + date);
     }
 
