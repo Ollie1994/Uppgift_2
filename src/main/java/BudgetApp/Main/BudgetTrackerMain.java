@@ -1,7 +1,8 @@
-package BudgetApp;
+package BudgetApp.Main;
 
 import BudgetApp.ServiceClasses.ExpenseStorageServiceClass;
 import BudgetApp.ServiceClasses.UserServiceClass;
+import BudgetApp.InputClasses.UserInputClass;
 
 import java.io.IOException;
 

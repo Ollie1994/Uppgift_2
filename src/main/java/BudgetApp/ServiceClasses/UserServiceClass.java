@@ -6,7 +6,7 @@
 package BudgetApp.ServiceClasses;
 
 import BudgetApp.TemplateClasses.User;
-import BudgetApp.UserInputClass;
+import BudgetApp.InputClasses.UserInputClass;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 

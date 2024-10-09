@@ -1,4 +1,4 @@
-package BudgetApp;
+package BudgetApp.InputClasses;
 
 import BudgetApp.EnumClasses.ExpenseCategory;
 import BudgetApp.EnumClasses.IncomeCategory;

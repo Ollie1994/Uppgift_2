@@ -4,7 +4,7 @@ package BudgetApp.ServiceClasses;
 // https://bito.ai/resources/java-localdatetime-to-string-java-explained/#5
 import BudgetApp.EnumClasses.ExpenseCategory;
 import BudgetApp.TemplateClasses.Expense;
-import BudgetApp.UserInputClass;
+import BudgetApp.InputClasses.UserInputClass;
 import com.google.gson.Gson;
 
 import java.io.FileWriter;
