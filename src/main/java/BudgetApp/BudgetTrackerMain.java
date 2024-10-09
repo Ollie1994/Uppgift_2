@@ -3,10 +3,10 @@ package BudgetApp;
 import BudgetApp.ServiceClasses.ExpenseStorageServiceClass;
 import BudgetApp.ServiceClasses.UserServiceClass;
 
-import java.time.LocalDateTime;
+import java.io.IOException;
 
 public class BudgetTrackerMain {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
         UserInputClass userInputClass = new UserInputClass();
         UserServiceClass userServiceClass = new UserServiceClass();
         ExpenseStorageServiceClass expenseStorageServiceClass = new ExpenseStorageServiceClass();
@@ -25,15 +25,17 @@ public class BudgetTrackerMain {
                     System.out.println(loggedIn); // test ta bort sen
                     break;
 
-                //case 3 ->
+                case 3:
+                    System.exit(0);
+
             }
         }
         //while loop så länge man är inloggad
 
         while (loggedIn == true) {
-        //MENY 2
+            //MENY 2
             System.out.println("YOU ARE LOGGED IN!\nMain Menu\n1. Display all accounts (test val)\n2. EXIT!" +
-            "\n3. Add an expense\n4. Add an income\n5. ");
+                    "\n3. Add an expense\n4. Add an income\n5. ");
             int mainMenu = userInputClass.inputStartMenuChoice(); // skicka in något här som ändra trycatchen till att tilåta flera val
             switch (mainMenu) {
                 case 1 -> userServiceClass.displayAccounts(); // bara för test
@@ -44,38 +46,9 @@ public class BudgetTrackerMain {
             }
 
         }
-        /* I programmet ska du kunna:
-         - Lägga till en eller flera utgifter och lägga till en eller flera inkomster
-         - Dina inkomster och utgifter ska sparas till en fil i formatet JSON.
-         - Dessa filer ska läsas in när du startar upp ditt program så att du kan använda
-            din budget app över tid.
-         - Du ska även kunna se alla dina inkomster respektive utgifter.
-         - Du ska också kunna se hur din budget ser ut med inkomster kontra utgifter,
-            alltså inkomster - utgifter.
-         - Du ska även kunna ändra en utgift eller inkomst samt kunna ta bort en inkomst
-            eller utgift.
-        */
-
-
-    }
-
-    public static class Transaction {
-
-        private double amount;
-        private LocalDateTime date; // kanske ta bort ifall nyckel date trackar genom ta bort o lägg till i databas
-
-        public Transaction(double amount, LocalDateTime date) {
-            this.amount = amount;
-            this.date = date;
-            //lägga till mer här ? tex if august save in august ?
-        }
-
-
-
-
-        public double getAmount() {return amount;}
-        public void setAmount(double amount) {this.amount = amount;}
-        public LocalDateTime getDate() {return date;}
-        public void setDate(LocalDateTime date) {this.date = date;}
     }
 }
+
+
+
+
