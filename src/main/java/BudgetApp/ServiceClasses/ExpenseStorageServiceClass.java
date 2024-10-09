@@ -5,26 +5,39 @@ package BudgetApp.ServiceClasses;
 import BudgetApp.EnumClasses.ExpenseCategory;
 import BudgetApp.TemplateClasses.Expense;
 import BudgetApp.UserInputClass;
+import com.google.gson.Gson;
 
+import java.io.FileWriter;
+import java.io.IOException;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.HashMap;
 
 public class ExpenseStorageServiceClass {
     UserInputClass userInputClass = new UserInputClass();
-    HashMap<LocalDateTime, Expense> expenses = new HashMap<LocalDateTime, Expense>();
+    HashMap<String, Expense> expenses = new HashMap<String, Expense>();
 
     /* expense:
     - Amount, date, category
 
      */
-    public void createExpense() {
+    public void createExpense() throws IOException {
+        Gson gson = new Gson();
+        FileWriter fw = new FileWriter("src/main/expense.json"); // kanske fixar detta så det blir mer specifikt till månad eller user
         System.out.println("Pick a category");
         ExpenseCategory category = ExpenseCategory.valueOf(userInputClass.inputEnumCategoryChoice()); // byt till annan tC
         System.out.println("Please enter an amount: ");
         double amount = userInputClass.inputAmountChoice();
-        LocalDateTime date = LocalDateTime.now();
-        expenses.put(LocalDateTime.now(), new Expense(amount, date, category));
-        System.out.println("New " + category + " expense has been created\n For: " + amount + ".Kr\n Date: " + date);
+        LocalDateTime ldt = LocalDateTime.now();
+        LocalDateTime ldtmn = ldt.minusNanos(100);
+        String str = ldtmn.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
+        expenses.put(str, new Expense(amount, category));
+        gson.toJson(expenses, fw);
+        fw.close();
+
+
+
+       // SKRIV OM ---- System.out.println("New " + category + " expense has been created\n For: " + amount + ".Kr\n Date: " + date);
     }
 
 

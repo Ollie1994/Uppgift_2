@@ -83,10 +83,10 @@ public class UserInputClass {
                         finalCategory = String.valueOf(category_inCa);
                         break;
                     default:
-                        System.out.println("Invalid inputUsernamePasswordChoice!");
+                        System.out.println("Invalid input!");
                 }
             } catch (Exception e) {
-                System.out.println("Invalid inputUsernamePasswordChoice!");
+                System.out.println("Invalid input!");
             } finally {
 
             }

@@ -2,14 +2,12 @@ package BudgetApp.TemplateClasses;
 
 import BudgetApp.EnumClasses.IncomeCategory;
 
-import java.time.LocalDateTime;
-
 public class Income extends Transaction {
 
     private IncomeCategory category;
 
-    public Income(double amount, LocalDateTime date, IncomeCategory category) {
-        super(amount, date);
+    public Income(double amount, IncomeCategory category) {
+        super(amount);
         this.category = category;
     }
 

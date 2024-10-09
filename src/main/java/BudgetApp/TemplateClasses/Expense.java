@@ -2,14 +2,12 @@ package BudgetApp.TemplateClasses;
 
 import BudgetApp.EnumClasses.ExpenseCategory;
 
-import java.time.LocalDateTime;
-
 public class Expense extends Transaction {
 
     private ExpenseCategory category;
 
-    public Expense(double amount, LocalDateTime date, ExpenseCategory category) {
-        super(amount, date);
+    public Expense(double amount, ExpenseCategory category) {
+        super(amount);
         this.category = category;
     }
 
