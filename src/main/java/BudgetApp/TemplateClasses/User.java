@@ -1,4 +1,4 @@
-package BudgetApp;
+package BudgetApp.TemplateClasses;
 
 public class User {
 

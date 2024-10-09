@@ -3,7 +3,10 @@
 // https://www.w3schools.com/java/java_howto_loop_through_hashmap.asp
 
 
-package BudgetApp;
+package BudgetApp.ServiceClasses;
+
+import BudgetApp.TemplateClasses.User;
+import BudgetApp.UserInputClass;
 
 import java.time.LocalDateTime;
 import java.util.HashMap;
@@ -42,8 +45,8 @@ public class UserServiceClass {
             String userName = userInputClass.inputUsernamePasswordChoice();
             System.out.println("Please enter your password");
             String password = userInputClass.inputUsernamePasswordChoice();
-            for (User userTemplateClass : users.values()) {
-                if (userName.equals(userTemplateClass.getUserName()) && password.equals(userTemplateClass.getPassword())) {
+            for (User user : users.values()) {
+                if (userName.equals(user.getUserName()) && password.equals(user.getPassword())) {
                     System.out.println("You have successfully logged in!");
                      loggedIn = true;
                 }

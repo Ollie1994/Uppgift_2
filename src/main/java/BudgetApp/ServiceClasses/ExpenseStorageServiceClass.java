@@ -1,7 +1,11 @@
-package BudgetApp;
+package BudgetApp.ServiceClasses;
 // https://stackoverflow.com/questions/43117731/what-is-type-typetoken
 // https://www.javadoc.io/doc/com.google.code.gson/gson/2.6.2/com/google/gson/reflect/TypeToken.html
 // https://bito.ai/resources/java-localdatetime-to-string-java-explained/#5
+import BudgetApp.EnumClasses.ExpenseCategory;
+import BudgetApp.TemplateClasses.Expense;
+import BudgetApp.UserInputClass;
+
 import java.time.LocalDateTime;
 import java.util.HashMap;
 

@@ -1,4 +1,4 @@
-package BudgetApp;
+package BudgetApp.ServiceClasses;
 
 public class IncomeStorageServiceClass {
 }

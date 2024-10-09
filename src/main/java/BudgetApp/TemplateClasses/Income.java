@@ -1,8 +1,11 @@
-package BudgetApp;
+package BudgetApp.TemplateClasses;
+
+import BudgetApp.BudgetTrackerMain;
+import BudgetApp.EnumClasses.IncomeCategory;
 
 import java.time.LocalDateTime;
 
-public class Income extends Transaction {
+public class Income extends BudgetTrackerMain.Transaction {
 
     private IncomeCategory category;
 

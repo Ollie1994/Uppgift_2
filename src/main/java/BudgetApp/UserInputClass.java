@@ -1,5 +1,8 @@
 package BudgetApp;
 
+import BudgetApp.EnumClasses.ExpenseCategory;
+import BudgetApp.EnumClasses.IncomeCategory;
+
 import java.util.Scanner;
 
 // att ha tryCatchen i en egen klass gör det mycket lättare att återanvända kod-

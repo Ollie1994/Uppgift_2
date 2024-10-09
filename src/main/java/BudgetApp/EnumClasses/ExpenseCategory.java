@@ -1,4 +1,4 @@
-package BudgetApp;
+package BudgetApp.EnumClasses;
 // https://familybudgetexpert.com/budget-categories/#Income
 public enum ExpenseCategory {
     HOUSING, HOMESERVICES, UTILITIES, HOUSEHOLDITEMS,
