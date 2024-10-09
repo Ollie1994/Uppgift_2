@@ -11,11 +11,11 @@ public class UserInputClass {
 
     public int inputStartMenuChoice() {
         int input = 0;
-        while (input <= 0 || input > 3) {
+        while (input <= 0 || input > 4) {
             try {
                 Scanner sc = new Scanner(System.in);
                 input = sc.nextInt();
-                if (input <= 0 || input > 3) {
+                if (input <= 0 || input > 4) {
                     System.out.println("Invalid input!");
                 }
             } catch (Exception e) {

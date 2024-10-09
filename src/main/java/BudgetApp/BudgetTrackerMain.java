@@ -12,8 +12,6 @@ public class BudgetTrackerMain {
         ExpenseStorageServiceClass expenseStorageServiceClass = new ExpenseStorageServiceClass();
 
 
-
-        userServiceClass.deleteAccount();
         boolean loggedIn = false;
         while (loggedIn == false) {
             System.out.println("Start Menu\n1. Create a new account\n2. Login\n3. Delete an account\n4. Exit");
