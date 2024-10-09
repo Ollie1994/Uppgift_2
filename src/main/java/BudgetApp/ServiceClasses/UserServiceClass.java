@@ -105,7 +105,6 @@ public class UserServiceClass {
         }
         System.out.println("Type in yyyy-MM-dd HH:mm:ss of user you want to remove");
         users.remove(sc.nextLine());
-
         FileWriter fw = new FileWriter("src/main/user.json");
         gson.toJson(users, fw);
         fw.close();

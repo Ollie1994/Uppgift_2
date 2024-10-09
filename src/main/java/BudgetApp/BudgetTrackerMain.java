@@ -26,8 +26,10 @@ public class BudgetTrackerMain {
                     break;
                 case 3:
                     userServiceClass.deleteAccount();
+                    break;
                 case 4:
                     System.exit(0);
+                    break;
 
             }
         }
