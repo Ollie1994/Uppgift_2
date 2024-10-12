@@ -1,7 +1,7 @@
 // https://stackoverflow.com/questions/60592071/how-to-use-dates-as-keys-in-a-hashmap
 // https://www.geeksforgeeks.org/java-time-localdatetime-class-in-java/
 // https://www.w3schools.com/java/java_howto_loop_through_hashmap.asp
-
+// https://stackoverflow.com/questions/3634853/how-to-create-a-directory-in-java
 
 package BudgetApp.ServiceClasses;
 
@@ -11,6 +11,7 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
 
+import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -30,13 +31,26 @@ public class UserServiceClass {
     //-----------------------------------------------METHODS--------------------------------------------
 
 
-    public void createUserSpecificFile(String username, String password) throws IOException {
+    public void createUserSpecificFileForExpenses(String username, String password) throws IOException {
         String pathId = username + password;
-        String path = "src/main/".concat(pathId).concat(".json");
+        File test = new File("src/main/userspecificfiles/" + pathId);
+        test.mkdir();
+        String path = "src/main/userspecificfiles/".concat(pathId + "/").concat(pathId + "Expenses").concat(".json");
         System.out.println("Path = " + path);
         FileWriter fw = new FileWriter(path);
         fw.close();
     }
+
+    public void createUserSpecificFileForIncomes(String username, String password) throws IOException {
+        String pathId = username + password;
+        File test = new File("src/main/userspecificfiles/" + pathId);
+        test.mkdir();
+        String path = "src/main/userspecificfiles/".concat(pathId + "/").concat(pathId + "Incomes").concat(".json");
+        System.out.println("Path = " + path);
+        FileWriter fw = new FileWriter(path);
+        fw.close();
+    }
+
 
 
     public void createAccount() throws IOException {
@@ -48,10 +62,11 @@ public class UserServiceClass {
         LocalDateTime ldtmn = ldt.minusNanos(100);
         String str = ldtmn.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
 
-        createUserSpecificFile(userName, password);
+        createUserSpecificFileForExpenses(userName, password);
+        createUserSpecificFileForIncomes(userName, password);
 
 
-        FileReader fr = new FileReader("src/main/user.json");
+        FileReader fr = new FileReader("src/main/users.json");
         usersJson = new Gson().fromJson(fr, new TypeToken<HashMap<String, User>>() {
         }.getType());
         if (usersJson == null) {
@@ -64,7 +79,7 @@ public class UserServiceClass {
 
         users.put(str, new User(userName, password));
         System.out.println("You have successfully created a new account with username " + userName + " and password " + password);
-        FileWriter fw = new FileWriter("src/main/user.json");
+        FileWriter fw = new FileWriter("src/main/users.json");
         gson.toJson(users, fw);
         fw.close();
         fr.close();
@@ -82,7 +97,7 @@ public class UserServiceClass {
                 String userName = userInputClass.inputUsernamePasswordDateChoice();
                 System.out.println("Please enter your password");
                 String password = userInputClass.inputUsernamePasswordDateChoice();
-                FileReader fr = new FileReader("src/main/user.json");
+                FileReader fr = new FileReader("src/main/users.json");
                 users = new Gson().fromJson(fr, new TypeToken<HashMap<String, User>>() {
                 }.getType());
                 fr.close();
@@ -109,7 +124,7 @@ public class UserServiceClass {
             System.out.println("Type in yyyy-MM-dd HH:mm:ss of user you want to remove");
             String date = userInputClass.inputUsernamePasswordDateChoice();
             users.remove(date);
-            FileWriter fw = new FileWriter("src/main/user.json");
+            FileWriter fw = new FileWriter("src/main/users.json");
             gson.toJson(users, fw);
             fw.close();
         } else {
@@ -121,7 +136,7 @@ public class UserServiceClass {
     public boolean displayAccounts() throws IOException { // bara för testing
         boolean usersFound = true;
         try {
-            FileReader fr = new FileReader("src/main/user.json");
+            FileReader fr = new FileReader("src/main/users.json");
             usersJson = new Gson().fromJson(fr, new TypeToken<HashMap<String, User>>() {
             }.getType());
             if (usersJson == null) {
