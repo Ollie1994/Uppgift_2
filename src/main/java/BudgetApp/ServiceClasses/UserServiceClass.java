@@ -8,6 +8,7 @@ package BudgetApp.ServiceClasses;
 import BudgetApp.TemplateClasses.User;
 import BudgetApp.InputClasses.UserInputClass;
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
 
 import java.io.FileReader;
@@ -16,33 +17,33 @@ import java.io.IOException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.HashMap;
-import java.util.Scanner;
 
 public class UserServiceClass {
 
     UserInputClass userInputClass = new UserInputClass();
     HashMap<String, User> users = new HashMap<String, User>();
     HashMap<String, User> usersJson = new HashMap<String, User>();
+    Gson gson = new GsonBuilder().setPrettyPrinting().create();
+
 
 
     //-----------------------------------------------METHODS--------------------------------------------
 
 
     public void createAccount() throws IOException {
-        Gson gson = new Gson();
         FileReader fr = new FileReader("src/main/user.json");
         usersJson = new Gson().fromJson(fr, new TypeToken<HashMap<String, User>>() {
         }.getType());
         if (usersJson == null) {
-            System.out.println("usersJson = null"); //
+            System.out.println("usersJson = null"); // test ta bort sen
         } else {
-            System.out.println("usersJson = not empty");
+            System.out.println("usersJson = not empty"); // test ta bort sen
             users = usersJson;
         }
         System.out.println("Please enter a username: ");
-        String userName = userInputClass.inputUsernamePasswordChoice();
+        String userName = userInputClass.inputUsernamePasswordDateChoice();
         System.out.println("Please enter a password: ");
-        String password = userInputClass.inputUsernamePasswordChoice();
+        String password = userInputClass.inputUsernamePasswordDateChoice();
         LocalDateTime ldt = LocalDateTime.now();
         LocalDateTime ldtmn = ldt.minusNanos(100);
         String str = ldtmn.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
@@ -62,11 +63,10 @@ public class UserServiceClass {
         while (i < 3 && loggedIn == false) { // 3 test logins tills ool
             try {
                 i++;
-                Gson gson = new Gson();
                 System.out.println("Please enter your username");
-                String userName = userInputClass.inputUsernamePasswordChoice();
+                String userName = userInputClass.inputUsernamePasswordDateChoice();
                 System.out.println("Please enter your password");
-                String password = userInputClass.inputUsernamePasswordChoice();
+                String password = userInputClass.inputUsernamePasswordDateChoice();
                 FileReader fr = new FileReader("src/main/user.json");
                 users = new Gson().fromJson(fr, new TypeToken<HashMap<String, User>>() {
                 }.getType());
@@ -89,42 +89,42 @@ public class UserServiceClass {
 
 
     public void deleteAccount() throws IOException {
-        Scanner sc = new Scanner(System.in);
-        Gson gson = new Gson();
-        FileReader fr = new FileReader("src/main/user.json");
-        usersJson = new Gson().fromJson(fr, new TypeToken<HashMap<String, User>>() {
-        }.getType());
-        if (usersJson == null) {
-            System.out.println("usersJson = null"); //
+        boolean usersFound = displayAccounts();
+        if (usersFound) {
+            System.out.println("Type in yyyy-MM-dd HH:mm:ss of user you want to remove");
+            String date = userInputClass.inputUsernamePasswordDateChoice();
+            users.remove(date);
+            FileWriter fw = new FileWriter("src/main/user.json");
+            gson.toJson(users, fw);
+            fw.close();
         } else {
-            System.out.println("usersJson = not empty");
-            users = usersJson;
+            System.out.println("No users found");
         }
-        for (String i : users.keySet()) {
-            System.out.println("User\nKey - " + i + "\nUser - " + users.get(i));
-        }
-        System.out.println("Type in yyyy-MM-dd HH:mm:ss of user you want to remove");
-        users.remove(sc.nextLine());
-        FileWriter fw = new FileWriter("src/main/user.json");
-        gson.toJson(users, fw);
-        fw.close();
-        fr.close();
     }
 
 
-    public void displayAccounts() throws IOException { // bara för testing
+    public boolean displayAccounts() throws IOException { // bara för testing
+        boolean usersFound = true;
         try {
-            Gson gson = new Gson();
             FileReader fr = new FileReader("src/main/user.json");
-            users = new Gson().fromJson(fr, new TypeToken<HashMap<String, User>>() {
+            usersJson = new Gson().fromJson(fr, new TypeToken<HashMap<String, User>>() {
             }.getType());
+            if (usersJson == null) {
+                System.out.println("usersJson = null"); // test ta bort sen
+                usersFound = false;
+            } else {
+                System.out.println("usersJson = not empty"); // test ta bort sen
+                users = usersJson;
+            }
             for (String i : users.keySet()) {
                 System.out.println("User\nKey - " + i + "\nUser - " + users.get(i));
             }
             fr.close();
         } catch (NullPointerException e) {
             System.out.println("No users found");
+            usersFound = false;
         }
+        return usersFound;
     }
 
 

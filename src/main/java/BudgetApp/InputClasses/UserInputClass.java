@@ -26,12 +26,12 @@ public class UserInputClass {
         return input;
     }
 
-    public String inputUsernamePasswordChoice() {
+    public String inputUsernamePasswordDateChoice() {
         String input = "";
             try {
                 Scanner sc = new Scanner(System.in);
                 System.out.println("Input please");
-                input = sc.next();
+                input = sc.nextLine();
             } catch (Exception e) {
                 System.out.println("Invalid input!");
             } finally {
