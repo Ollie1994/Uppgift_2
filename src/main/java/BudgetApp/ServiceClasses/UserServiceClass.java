@@ -30,7 +30,27 @@ public class UserServiceClass {
     //-----------------------------------------------METHODS--------------------------------------------
 
 
+    public void createUserSpecificFile(String username, String password) throws IOException {
+        String pathId = username + password;
+        String path = "src/main/".concat(pathId).concat(".json");
+        System.out.println("Path = " + path);
+        FileWriter fw = new FileWriter(path);
+        fw.close();
+    }
+
+
     public void createAccount() throws IOException {
+        System.out.println("Please enter a username: ");
+        String userName = userInputClass.inputUsernamePasswordDateChoice();
+        System.out.println("Please enter a password: ");
+        String password = userInputClass.inputUsernamePasswordDateChoice();
+        LocalDateTime ldt = LocalDateTime.now();
+        LocalDateTime ldtmn = ldt.minusNanos(100);
+        String str = ldtmn.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
+
+        createUserSpecificFile(userName, password);
+
+
         FileReader fr = new FileReader("src/main/user.json");
         usersJson = new Gson().fromJson(fr, new TypeToken<HashMap<String, User>>() {
         }.getType());
@@ -40,13 +60,8 @@ public class UserServiceClass {
             System.out.println("usersJson = not empty"); // test ta bort sen
             users = usersJson;
         }
-        System.out.println("Please enter a username: ");
-        String userName = userInputClass.inputUsernamePasswordDateChoice();
-        System.out.println("Please enter a password: ");
-        String password = userInputClass.inputUsernamePasswordDateChoice();
-        LocalDateTime ldt = LocalDateTime.now();
-        LocalDateTime ldtmn = ldt.minusNanos(100);
-        String str = ldtmn.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
+
+
         users.put(str, new User(userName, password));
         System.out.println("You have successfully created a new account with username " + userName + " and password " + password);
         FileWriter fw = new FileWriter("src/main/user.json");
