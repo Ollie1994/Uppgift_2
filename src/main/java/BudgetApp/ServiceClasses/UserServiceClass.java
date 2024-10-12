@@ -5,16 +5,13 @@
 
 package BudgetApp.ServiceClasses;
 
-import BudgetApp.TemplateClasses.User;
 import BudgetApp.InputClasses.UserInputClass;
+import BudgetApp.TemplateClasses.User;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
 
-import java.io.File;
-import java.io.FileReader;
-import java.io.FileWriter;
-import java.io.IOException;
+import java.io.*;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.HashMap;
@@ -33,9 +30,9 @@ public class UserServiceClass {
 
     public void createUserSpecificFileForExpenses(String username, String password) throws IOException {
         String pathId = username + password;
-        File test = new File("src/main/userspecificfiles/" + pathId);
+        File test = new File("src/main/userSpecificFiles/" + pathId);
         test.mkdir();
-        String path = "src/main/userspecificfiles/".concat(pathId + "/").concat(pathId + "Expenses").concat(".json");
+        String path = "src/main/userSpecificFiles/".concat(pathId + "/").concat(pathId + "Expenses").concat(".json");
         System.out.println("Path = " + path);
         FileWriter fw = new FileWriter(path);
         fw.close();
@@ -43,9 +40,9 @@ public class UserServiceClass {
 
     public void createUserSpecificFileForIncomes(String username, String password) throws IOException {
         String pathId = username + password;
-        File test = new File("src/main/userspecificfiles/" + pathId);
+        File test = new File("src/main/userSpecificFiles/" + pathId);
         test.mkdir();
-        String path = "src/main/userspecificfiles/".concat(pathId + "/").concat(pathId + "Incomes").concat(".json");
+        String path = "src/main/userSpecificFiles/".concat(pathId + "/").concat(pathId + "Incomes").concat(".json");
         System.out.println("Path = " + path);
         FileWriter fw = new FileWriter(path);
         fw.close();
@@ -65,24 +62,28 @@ public class UserServiceClass {
         createUserSpecificFileForExpenses(userName, password);
         createUserSpecificFileForIncomes(userName, password);
 
+        try {
+            FileReader fr = new FileReader("src/main/users.json");
+            usersJson = new Gson().fromJson(fr, new TypeToken<HashMap<String, User>>() {
+            }.getType());
+            if (usersJson == null) {
+                System.out.println("usersJson = null"); // test ta bort sen
+            } else {
+                System.out.println("usersJson = not empty"); // test ta bort sen
+                users = usersJson;
+            }
+            fr.close();
+            } catch (Exception e) {
+            System.out.println("catch ?");
+            }
 
-        FileReader fr = new FileReader("src/main/users.json");
-        usersJson = new Gson().fromJson(fr, new TypeToken<HashMap<String, User>>() {
-        }.getType());
-        if (usersJson == null) {
-            System.out.println("usersJson = null"); // test ta bort sen
-        } else {
-            System.out.println("usersJson = not empty"); // test ta bort sen
-            users = usersJson;
-        }
+            users.put(str, new User(userName, password));
+            System.out.println("You have successfully created a new account with username " + userName + " and password " + password);
+            FileWriter fw = new FileWriter("src/main/users.json");
+            gson.toJson(users, fw);
+            fw.close();
 
 
-        users.put(str, new User(userName, password));
-        System.out.println("You have successfully created a new account with username " + userName + " and password " + password);
-        FileWriter fw = new FileWriter("src/main/users.json");
-        gson.toJson(users, fw);
-        fw.close();
-        fr.close();
 
     }
 
@@ -97,10 +98,14 @@ public class UserServiceClass {
                 String userName = userInputClass.inputUsernamePasswordDateChoice();
                 System.out.println("Please enter your password");
                 String password = userInputClass.inputUsernamePasswordDateChoice();
-                FileReader fr = new FileReader("src/main/users.json");
-                users = new Gson().fromJson(fr, new TypeToken<HashMap<String, User>>() {
-                }.getType());
-                fr.close();
+                try {
+                    FileReader fr = new FileReader("src/main/users.json");
+                    users = new Gson().fromJson(fr, new TypeToken<HashMap<String, User>>() {
+                    }.getType());
+                    fr.close();
+                } catch (Exception e) {
+                    System.out.println("catch ?");
+                }
                 for (User user : users.values()) {
                     if (userName.equals(user.getUserName()) && password.equals(user.getPassword())) {
                         System.out.println("You have successfully logged in!");
@@ -150,7 +155,7 @@ public class UserServiceClass {
                 System.out.println("User\nKey - " + i + "\nUser - " + users.get(i));
             }
             fr.close();
-        } catch (NullPointerException e) {
+        } catch (Exception e) {
             System.out.println("No users found");
             usersFound = false;
         }
