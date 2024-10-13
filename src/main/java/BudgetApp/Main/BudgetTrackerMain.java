@@ -1,8 +1,8 @@
 package BudgetApp.Main;
 
+import BudgetApp.InputClasses.UserInputClass;
 import BudgetApp.ServiceClasses.ExpenseStorageServiceClass;
 import BudgetApp.ServiceClasses.UserServiceClass;
-import BudgetApp.InputClasses.UserInputClass;
 
 import java.io.IOException;
 
@@ -11,6 +11,8 @@ public class BudgetTrackerMain {
         UserInputClass userInputClass = new UserInputClass();
         UserServiceClass userServiceClass = new UserServiceClass();
         ExpenseStorageServiceClass expenseStorageServiceClass = new ExpenseStorageServiceClass();
+
+
 
 
         boolean loggedIn = false;
