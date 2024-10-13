@@ -11,8 +11,12 @@ public class Expense extends Transaction {
         this.category = category;
     }
 
+    @Override
+    public String toString() {
+        return "Expense\n Category: " + category + "\n Amount: " + getAmount();
+    }
 
-        // Skapa en metod för att displaya alla expenses (osv) som overrider från transaction
+// Skapa en metod för att displaya alla expenses (osv) som overrider från transaction
         // "så samma metod men tar med all ifrån trans och expense" osv
 
     public ExpenseCategory getCategory() {return category;}

@@ -32,7 +32,7 @@ public class UserServiceClass {
     //-----------------------------------------------METHODS--------------------------------------------
 
 
-    public void createUserSpecificFileForExpenses(String username, String password, LocalDateTime date) throws IOException {
+    public String createUserSpecificFileForExpenses(String username, String password, LocalDateTime date) throws IOException {
         String pathId = username + password;
         LocalDateTime ldt = date;
         String str = ldt.format(DateTimeFormatter.ofPattern("yyyyMM"));
@@ -44,9 +44,10 @@ public class UserServiceClass {
         System.out.println("Path = " + path);
         FileWriter fw = new FileWriter(path);
         fw.close();
+        return path;
     }
 
-    public void createUserSpecificFileForIncomes(String username, String password, LocalDateTime date) throws IOException {
+    public String createUserSpecificFileForIncomes(String username, String password, LocalDateTime date) throws IOException {
         String pathId = username + password;
         LocalDateTime ldt = date;
         String str = ldt.format(DateTimeFormatter.ofPattern("yyyyMM"));
@@ -58,6 +59,7 @@ public class UserServiceClass {
         System.out.println("Path = " + path);
         FileWriter fw = new FileWriter(path);
         fw.close();
+        return path;
     }
 
 
