@@ -42,8 +42,7 @@ public class BudgetTrackerMain {
                         "\n4.----- \n5. Add an income\n6. --------  ");
                 int mainMenu = userInputClass.inputStartMenuChoice(); // skicka in något här som ändra trycatchen till att tilåta flera val
                 switch (mainMenu) {
-                    case 1 ->
-                            loggedIn = false; // istället för EXIT så loopar vi runt till början igen genom att logga ut?
+                    case 1 -> loggedIn = false; // istället för EXIT så loopar vi runt till början igen genom att logga ut?
                     case 2 -> userServiceClass.displayAccounts(); // bara för test
                     case 3 -> expenseStorageServiceClass.createExpense();
                     //case 4 ->
