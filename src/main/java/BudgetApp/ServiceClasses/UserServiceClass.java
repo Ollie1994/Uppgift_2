@@ -11,7 +11,10 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
 
-import java.io.*;
+import java.io.File;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.HashMap;
@@ -28,21 +31,29 @@ public class UserServiceClass {
     //-----------------------------------------------METHODS--------------------------------------------
 
 
-    public void createUserSpecificFileForExpenses(String username, String password) throws IOException {
+    public void createUserSpecificFileForExpenses(String username, String password, LocalDateTime date) throws IOException {
         String pathId = username + password;
-        File test = new File("src/main/userSpecificFiles/" + pathId);
-        test.mkdir();
-        String path = "src/main/userSpecificFiles/".concat(pathId + "/").concat(pathId + "Expenses").concat(".json");
+        LocalDateTime ldt = date;
+        String str = ldt.format(DateTimeFormatter.ofPattern("yyyyMM"));
+        System.out.println(str);
+        String pathDate = username + password + str;
+        File test = new File("src/main/userSpecificFiles/" + pathId + "/" + pathDate);
+        test.mkdirs();
+        String path = "src/main/userSpecificFiles/" + pathId + "/" + pathDate + "/" + pathDate + "Expenses" + ".json";
         System.out.println("Path = " + path);
         FileWriter fw = new FileWriter(path);
         fw.close();
     }
 
-    public void createUserSpecificFileForIncomes(String username, String password) throws IOException {
+    public void createUserSpecificFileForIncomes(String username, String password, LocalDateTime date) throws IOException {
         String pathId = username + password;
-        File test = new File("src/main/userSpecificFiles/" + pathId);
-        test.mkdir();
-        String path = "src/main/userSpecificFiles/".concat(pathId + "/").concat(pathId + "Incomes").concat(".json");
+        LocalDateTime ldt = date;
+        String str = ldt.format(DateTimeFormatter.ofPattern("yyyyMM"));
+        System.out.println(str);
+        String pathDate = username + password + str;
+        File test = new File("src/main/userSpecificFiles/" + pathId + "/" + pathDate);
+        test.mkdirs();
+        String path = "src/main/userSpecificFiles/" + pathId + "/" + pathDate + "/" + pathDate + "Incomes" + ".json";
         System.out.println("Path = " + path);
         FileWriter fw = new FileWriter(path);
         fw.close();
@@ -59,8 +70,8 @@ public class UserServiceClass {
         LocalDateTime ldtmn = ldt.minusNanos(100);
         String str = ldtmn.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
 
-        createUserSpecificFileForExpenses(userName, password);
-        createUserSpecificFileForIncomes(userName, password);
+        createUserSpecificFileForExpenses(userName, password, ldt);
+        createUserSpecificFileForIncomes(userName, password, ldt);
 
         try {
             FileReader fr = new FileReader("src/main/users.json");
