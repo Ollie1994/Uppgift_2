@@ -23,9 +23,8 @@ public class UserServiceClass {
 
     UserInputClass userInputClass = new UserInputClass();
     HashMap<String, User> users = new HashMap<String, User>();
-    HashMap<String, User> usersJson = new HashMap<String, User>();
+    HashMap<String, User> usersJson = new HashMap<String, User>(); // bara för enkelhetens skull för att hämta en tom fil sätter hashmappen till mnul och gör den svå att använda
     Gson gson = new GsonBuilder().setPrettyPrinting().create();
-
 
 
     //-----------------------------------------------METHODS--------------------------------------------
@@ -60,7 +59,6 @@ public class UserServiceClass {
     }
 
 
-
     public void createAccount() throws IOException {
         System.out.println("Please enter a username: ");
         String userName = userInputClass.inputUsernamePasswordDateChoice();
@@ -84,20 +82,17 @@ public class UserServiceClass {
                 users = usersJson;
             }
             fr.close();
-            } catch (Exception e) {
+        } catch (Exception e) {
             System.out.println("catch ?");
-            }
+        }
 
-            users.put(str, new User(userName, password));
-            System.out.println("You have successfully created a new account with username " + userName + " and password " + password);
-            FileWriter fw = new FileWriter("src/main/users.json");
-            gson.toJson(users, fw);
-            fw.close();
-
-
+        users.put(str, new User(userName, password));
+        System.out.println("You have successfully created a new account with username " + userName + " and password " + password);
+        FileWriter fw = new FileWriter("src/main/users.json");
+        gson.toJson(users, fw);
+        fw.close();
 
     }
-
 
     public boolean login() throws IOException {
         int i = 0;
@@ -133,7 +128,6 @@ public class UserServiceClass {
         return loggedIn;
     }
 
-
     public void deleteAccount() throws IOException {
         boolean usersFound = displayAccounts();
         if (usersFound) {
@@ -147,7 +141,6 @@ public class UserServiceClass {
             System.out.println("No users found");
         }
     }
-
 
     public boolean displayAccounts() throws IOException { // bara för testing
         boolean usersFound = true;
