@@ -36,10 +36,6 @@ public class ExpenseStorageServiceClass {
 
     public void createExpense() throws IOException {
 
-
-
-
-
         System.out.println("Enter your username");
         String username = userInputClass.inputUsernamePasswordDateChoice();
         System.out.println("Enter your password");
@@ -51,16 +47,15 @@ public class ExpenseStorageServiceClass {
         LocalDateTime ldt = LocalDateTime.now();
         LocalDateTime ldtmn = ldt.minusNanos(100);
         String str = ldtmn.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
+        String pathStr = ldt.format(DateTimeFormatter.ofPattern("yyyyMM"));
 
 
-        String path = userServiceClass.createUserSpecificFileForExpenses(username, password, ldt);
-        System.out.println("PATH ???   " + path);
+        String path = "src/main/userSpecificFiles/" + username + password + "/" + username + password + pathStr + "/" + username + password + pathStr + "Expenses.json";
 
             FileReader fr = new FileReader(path);
             expensesJson = new Gson().fromJson(fr, new TypeToken<HashMap<String, Expense>>() {
             }.getType());
-            System.out.println("NULllll????");
-            System.out.println(expensesJson);
+
             if (expensesJson == null) {
                 System.out.println("expensesJson = null"); // test ta bort sen
             } else {
@@ -83,7 +78,7 @@ public class ExpenseStorageServiceClass {
 
 
         // VARFÖR FUNKAR DETTA med hämtning till expensesJson men int när jag försöker göra det i create expense???
-
+        // FIXA SÅ MAN KAN SÖKA PÅ SPECIFIKA EXPENSES
 
 
         String path = "src/main/userSpecificFiles/User11Lösen11/User11Lösen11202410/User11Lösen11202410Expenses.json";
