@@ -26,6 +26,30 @@ public class UserInputClass {
         return input;
     }
 
+
+    public int inputMainMenuChoice() {
+        int input = 0;
+        while (input <= 0 || input > 4) {
+            try {
+                Scanner sc = new Scanner(System.in);
+                input = sc.nextInt();
+                if (input <= 0 || input > 4) {
+                    System.out.println("Invalid input!");
+                }
+            } catch (Exception e) {
+                System.out.println("Invalid input!");
+            } finally {
+            }
+        }
+        return input;
+    }
+
+
+
+
+
+
+
     public String inputUsernamePasswordDateChoice() {
         String input = "";
             try {
