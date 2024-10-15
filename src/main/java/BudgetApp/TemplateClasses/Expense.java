@@ -13,7 +13,7 @@ public class Expense extends Transaction {
 
     @Override
     public String toString() {
-        return "Expense\n Category: " + category + "\n Amount: " + getAmount();
+        return "Expense\n- Category: " + category + "\n- Amount: " + getAmount();
     }
 
 // Skapa en metod för att displaya alla expenses (osv) som overrider från transaction

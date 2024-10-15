@@ -48,14 +48,13 @@ public class ExpenseStorageServiceClass {
         LocalDateTime ldtmn = ldt.minusNanos(100);
         String str = ldtmn.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
         String pathStr = ldt.format(DateTimeFormatter.ofPattern("yyyyMM"));
-
-
         String path = "src/main/userSpecificFiles/" + username + password + "/" + username + password + pathStr + "/" + username + password + pathStr + "Expenses.json";
 
+
+        try {
             FileReader fr = new FileReader(path);
             expensesJson = new Gson().fromJson(fr, new TypeToken<HashMap<String, Expense>>() {
             }.getType());
-
             if (expensesJson == null) {
                 System.out.println("expensesJson = null"); // test ta bort sen
             } else {
@@ -63,6 +62,9 @@ public class ExpenseStorageServiceClass {
                 expenses = expensesJson;
             }
             fr.close();
+        } catch (Exception e) {
+            System.out.println("catch ?");
+        }
 
 
         expenses.put(str, new Expense(amount, category));
@@ -74,27 +76,36 @@ public class ExpenseStorageServiceClass {
 
 
 
-    public void displayExpenses() throws IOException { // bara för testing
+    public boolean displayExpensesByDate() throws IOException { // bara för testing
+        System.out.println("Enter your username");
+        String username = userInputClass.inputUsernamePasswordDateChoice();
+        System.out.println("Enter your password");
+        String password = userInputClass.inputUsernamePasswordDateChoice();
+        System.out.println("Enter the year and month of the expense you would like to checkout, (yyyyMM/199408)");
+        String date = userInputClass.inputUsernamePasswordDateChoice();
+        String path = "src/main/userSpecificFiles/" + username + password + "/" + username + password + date + "/" + username + password + date + "Expenses.json";
 
-
-        // VARFÖR FUNKAR DETTA med hämtning till expensesJson men int när jag försöker göra det i create expense???
-        // FIXA SÅ MAN KAN SÖKA PÅ SPECIFIKA EXPENSES
-
-
-        String path = "src/main/userSpecificFiles/User11Lösen11/User11Lösen11202410/User11Lösen11202410Expenses.json";
-        FileReader fr = new FileReader(path);
-        expensesJson = new Gson().fromJson(fr, new TypeToken<HashMap<String, Expense>>() {
-        }.getType());
-        if (expensesJson == null) {
-            System.out.println("usersJson = null"); // test ta bort sen
-        } else {
-            System.out.println("usersJson = not empty"); // test ta bort sen
-            expenses = expensesJson;
+        boolean expensesFound = true;
+        try {
+            FileReader fr = new FileReader(path);
+            expensesJson = new Gson().fromJson(fr, new TypeToken<HashMap<String, Expense>>() {
+            }.getType());
+            if (expensesJson == null) {
+                System.out.println("expensesJson = null"); // test ta bort sen
+                expensesFound = false;
+            } else {
+                System.out.println("expensesJson = not empty"); // test ta bort sen
+                expenses = expensesJson;
+            }
+            for (String i : expenses.keySet()) {
+                System.out.println("_______________________\nKey - " + i + "\n" + expenses.get(i));
+            }
+            fr.close();
+        } catch (Exception e) {
+            System.out.println("No expenses found");
+            expensesFound = false;
         }
-        for (String i : expenses.keySet()) {
-            System.out.println("User\nKey - " + i + "\nUser - " + expenses.get(i));
-        }
-        fr.close();
+        return expensesFound; // ska returna till remove expenses och ändra expenses
     }
 
 
