@@ -109,7 +109,29 @@ public class ExpenseStorageServiceClass {
     }
 
 
+    public void deleteAnExpenseByDate() throws IOException {
+        System.out.println("Enter your username");
+        String username = userInputClass.inputUsernamePasswordDateChoice();
+        System.out.println("Enter your password");
+        String password = userInputClass.inputUsernamePasswordDateChoice();
+        System.out.println("Enter the year and month of the expense you would like to remove, (yyyyMM/199408)");
+        String date = userInputClass.inputUsernamePasswordDateChoice();
+        String path = "src/main/userSpecificFiles/" + username + password + "/" + username + password + date + "/" + username + password + date + "Expenses.json";
 
+        boolean expensesFound = displayExpensesByDate();
+
+        if (expensesFound) {
+            System.out.println("Type in yyyy-MM-dd HH:mm:ss of expense you want to remove");
+            String expenseToBeRemoved = userInputClass.inputUsernamePasswordDateChoice();
+            System.out.println(expenses.get(expenseToBeRemoved) + "\n // Has been removed!");
+            expenses.remove(expenseToBeRemoved);
+            FileWriter fw = new FileWriter(path);
+            gson.toJson(expenses, fw);
+            fw.close();
+        } else {
+            System.out.println("No expenses found");
+        }
+    }
 
 
 

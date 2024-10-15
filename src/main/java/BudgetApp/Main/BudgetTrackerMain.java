@@ -43,14 +43,14 @@ public class BudgetTrackerMain {
             while (loggedIn == true) {
                 //MENY 2
                 System.out.println("\nMain Menu\n1. Back to start menu\n2. Display all accounts (test val)\n3. Add an expense" +
-                        "\n4. Display expenses by date\n5. Add an income\n6. --------  ");
+                        "\n4. Display expenses by date\n5. Delete an expense by date\n6. --------  ");
                 int mainMenu = userInputClass.inputMainMenuChoice(); // skicka in något här som ändra trycatchen till att tilåta flera val
                 switch (mainMenu) {
                     case 1 -> loggedIn = false; // istället för EXIT så loopar vi runt till början igen genom att logga ut?
                     case 2 -> userServiceClass.displayAccounts(); // bara för test
                     case 3 -> expenseStorageServiceClass.createExpense();
                     case 4 -> expenseStorageServiceClass.displayExpensesByDate();
-                    //case 5 -> // try catch öka
+                    case 5 -> expenseStorageServiceClass.deleteAnExpenseByDate();
 
 
                 }
