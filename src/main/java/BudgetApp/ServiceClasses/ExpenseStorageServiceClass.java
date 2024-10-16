@@ -38,6 +38,7 @@ public class ExpenseStorageServiceClass {
 
     //------------------ METHODS ---------------------------------------------------------------
 
+
     public void addExpenseToAllExpensesList(String userName, String password, ExpenseCategory category, String date, double amount) throws IOException {
         try {
             FileReader fr = new FileReader("src/main/userSpecificFiles/" + userName + password + "/" + "allExpenses.json");
@@ -155,7 +156,24 @@ public class ExpenseStorageServiceClass {
         String password = userInputClass.inputUsernamePasswordDateChoice();
         System.out.println("Enter the year and month of the expenses you would like to checkout, (yyyyMM/199408)");
         String date = userInputClass.inputUsernamePasswordDateChoice();
-        String path = "src/main/userSpecificFiles/" + username + password + "/" + username + password + date + "/" + username + password + date + "Expenses.json";
+
+        String yearSYes = date;
+        String monthSYes = date;
+        StringBuilder yearSb = new StringBuilder(yearSYes);
+        yearSb.setLength(4);
+        yearSYes = yearSb.toString();
+        System.out.println(yearSYes);
+
+        StringBuilder monthSb = new StringBuilder(monthSYes);
+        monthSb.setLength(6);
+        monthSb.deleteCharAt(0);
+        monthSb.deleteCharAt(0);
+        monthSb.deleteCharAt(0);
+        monthSb.deleteCharAt(0);
+        monthSYes = monthSb.toString();
+        System.out.println(monthSYes);
+
+        String path = "src/main/userSpecificFiles/" + username + password + "/" + yearSYes + "/" + monthSYes + "/" + "Expenses.json";
 
         boolean expensesFound = true;
         try {
@@ -185,7 +203,7 @@ public class ExpenseStorageServiceClass {
         String username = userInputClass.inputUsernamePasswordDateChoice();
         System.out.println("Enter your password");
         String password = userInputClass.inputUsernamePasswordDateChoice();
-        String path = "src/main/userSpecificFiles/" + username + password + "/" +  "Expenses.json";
+        String path = "src/main/userSpecificFiles/" + username + password + "/" +  "allExpenses.json";
 
         boolean expensesFound = true;
         try {
