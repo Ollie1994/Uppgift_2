@@ -149,13 +149,15 @@ public class ExpenseStorageServiceClass {
     // ------------------------------------------------------------------------------------------------------------------------------
 
 
-    public boolean displayExpensesByDate() throws IOException { // bara för testing
+    public boolean displayExpensesByDate(String username, String password, String date) throws IOException { // bara för testing
+        /*
         System.out.println("Enter your username");
         String username = userInputClass.inputUsernamePasswordDateChoice();
         System.out.println("Enter your password");
         String password = userInputClass.inputUsernamePasswordDateChoice();
         System.out.println("Enter the year and month of the expenses you would like to checkout, (yyyyMM/199408)");
         String date = userInputClass.inputUsernamePasswordDateChoice();
+        */
 
         String yearSYes = date;
         String monthSYes = date;
@@ -198,11 +200,12 @@ public class ExpenseStorageServiceClass {
         return expensesFound; // ska returna till remove expenses och ändra expenses
     }
 
-    public boolean displayAllExpenses(boolean choice) throws IOException { // bara för testing
-        System.out.println("Enter your username");
-        String username = userInputClass.inputUsernamePasswordDateChoice();
-        System.out.println("Enter your password");
-        String password = userInputClass.inputUsernamePasswordDateChoice();
+    public boolean displayAllExpenses(boolean choice, String username, String password) throws IOException { // bara för testing
+       // System.out.println("Enter your username");
+       // String username = userInputClass.inputUsernamePasswordDateChoice();
+       // System.out.println("Enter your password");
+       // String password = userInputClass.inputUsernamePasswordDateChoice();
+
         String path = "src/main/userSpecificFiles/" + username + password + "/" +  "allExpenses.json";
 
         boolean expensesFound = true;
@@ -238,7 +241,7 @@ public class ExpenseStorageServiceClass {
 
     public void deleteAnExpenseFromAllExpensesList(String userName, String password, String date) throws IOException {
         String path = "src/main/userSpecificFiles/" + userName + password + "/" + "allExpenses.json";
-        boolean expensesFound = displayAllExpenses(false);
+        boolean expensesFound = displayAllExpenses(false, userName, password);
 
         if (expensesFound) {
             allExpenses.remove(date);
@@ -276,7 +279,7 @@ public class ExpenseStorageServiceClass {
 
         String path = "src/main/userSpecificFiles/" + username + password + "/" + yearSYes + "/" + monthSYes + "/" + "Expenses.json";
 
-        boolean expensesFound = displayExpensesByDate();
+        boolean expensesFound = displayExpensesByDate(username, password, date);
 
         if (expensesFound) {
             System.out.println("Type in yyyy-MM-dd HH:mm:ss of expense you want to remove");
@@ -296,12 +299,13 @@ public class ExpenseStorageServiceClass {
     // ------------------------------------------------------------------------------------------------------------------------------
 
 
-    public void updateAnExpenseFromAllExpensesList(String userName, String password, ExpenseCategory category, double amount, String date) throws IOException {
+    public void updateAnExpenseFromAllExpensesList(String userName, String password, ExpenseCategory category, double amount, String newDate, String oldDate) throws IOException {
         String path = "src/main/userSpecificFiles/" + userName + password + "/" + "allExpenses.json";
-        boolean expensesFound = displayAllExpenses(false);
+        boolean expensesFound = displayAllExpenses(false, userName, password);
 
         if (expensesFound) {
-            allExpenses.remove(date);
+            allExpenses.remove(oldDate);
+            allExpenses.put(newDate, new Expense(amount, category));
             FileWriter fw = new FileWriter(path);
             gson.toJson(allExpenses, fw);
             fw.close();
@@ -309,16 +313,6 @@ public class ExpenseStorageServiceClass {
             System.out.println("No expenses found");
         }
     }
-
-
-
-
-
-
-
-
-
-
 
     public void updateAnExpenseByDate() throws IOException {
         System.out.println("Enter your username");
@@ -346,11 +340,15 @@ public class ExpenseStorageServiceClass {
 
         String path = "src/main/userSpecificFiles/" + username + password + "/" + yearSYes + "/" + monthSYes + "/" + "Expenses.json";
 
-        boolean expensesFound = displayExpensesByDate();
+        boolean expensesFound = displayExpensesByDate(username, password, date);
+        String oldDate = "";
+        String newDate = "";
 
         if (expensesFound) {
             System.out.println("Type in yyyy-MM-dd HH:mm:ss of expense you want to update");
             String expenseToBeUpdated = userInputClass.inputUsernamePasswordDateChoice();
+            oldDate = expenseToBeUpdated;
+            newDate = oldDate;
             System.out.println("Pick a category");
             ExpenseCategory category = ExpenseCategory.valueOf(userInputClass.inputEnumCategoryChoice()); // byt till annan tC
             System.out.println("Please enter an amount: ");
@@ -366,6 +364,7 @@ public class ExpenseStorageServiceClass {
                 strBTest.setLength(8);
                 String yearMonthDate = strBTest.toString();
                 String fullDate = yearMonthDate + newDateMinusYearMonth;
+                newDate = fullDate;
 
                 System.out.println(expenses.get(expenseToBeUpdated) + ", Date: " + expenseToBeUpdated + "\n // Has been replace with ->");
                 expenses.remove(expenseToBeUpdated);
@@ -381,12 +380,16 @@ public class ExpenseStorageServiceClass {
             FileWriter fw = new FileWriter(path);
             gson.toJson(expenses, fw);
             fw.close();
+
+            updateAnExpenseFromAllExpensesList(username, password, category, amount, newDate, oldDate);
         }
         else {
             System.out.println("No expenses found");
         }
     }
 
+
+    //------------------------------------------------------------------------------------------------------------
 
 
 
