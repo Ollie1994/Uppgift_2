@@ -296,6 +296,30 @@ public class ExpenseStorageServiceClass {
     // ------------------------------------------------------------------------------------------------------------------------------
 
 
+    public void updateAnExpenseFromAllExpensesList(String userName, String password, ExpenseCategory category, double amount, String date) throws IOException {
+        String path = "src/main/userSpecificFiles/" + userName + password + "/" + "allExpenses.json";
+        boolean expensesFound = displayAllExpenses(false);
+
+        if (expensesFound) {
+            allExpenses.remove(date);
+            FileWriter fw = new FileWriter(path);
+            gson.toJson(allExpenses, fw);
+            fw.close();
+        } else {
+            System.out.println("No expenses found");
+        }
+    }
+
+
+
+
+
+
+
+
+
+
+
     public void updateAnExpenseByDate() throws IOException {
         System.out.println("Enter your username");
         String username = userInputClass.inputUsernamePasswordDateChoice();
@@ -303,7 +327,24 @@ public class ExpenseStorageServiceClass {
         String password = userInputClass.inputUsernamePasswordDateChoice();
         System.out.println("Enter the year and month of the expense you would like to update, (yyyyMM/199408)");
         String date = userInputClass.inputUsernamePasswordDateChoice();
-        String path = "src/main/userSpecificFiles/" + username + password + "/" + username + password + date + "/" + username + password + date + "Expenses.json";
+
+        String yearSYes = date;
+        String monthSYes = date;
+        StringBuilder yearSb = new StringBuilder(yearSYes);
+        yearSb.setLength(4);
+        yearSYes = yearSb.toString();
+        System.out.println(yearSYes);
+
+        StringBuilder monthSb = new StringBuilder(monthSYes);
+        monthSb.setLength(6);
+        monthSb.deleteCharAt(0);
+        monthSb.deleteCharAt(0);
+        monthSb.deleteCharAt(0);
+        monthSb.deleteCharAt(0);
+        monthSYes = monthSb.toString();
+        System.out.println(monthSYes);
+
+        String path = "src/main/userSpecificFiles/" + username + password + "/" + yearSYes + "/" + monthSYes + "/" + "Expenses.json";
 
         boolean expensesFound = displayExpensesByDate();
 
@@ -315,15 +356,21 @@ public class ExpenseStorageServiceClass {
             System.out.println("Please enter an amount: ");
             double amount = userInputClass.inputAmountChoice();
 
-            System.out.println("Would you also like to change the date of the expense yes/no? (You can only change it within the month)");
+            System.out.println("Would you also like to change the date of the expense yes/no? (You can only change it within the month originally set, if you wanna change year or month (delete the expense and create a new custom one)");
             String answer = userInputClass.inputUsernamePasswordDateChoice();
             if (answer.equals("yes")) {
-                System.out.println("Type in the new date - yyyy-MM-dd HH:mm:ss");
-                String newDate = userInputClass.inputUsernamePasswordDateChoice();
+                System.out.println("Type in the new date - (dd HH:mm:ss)");
+                String newDateMinusYearMonth = userInputClass.inputUsernamePasswordDateChoice();
+                String completeDate = expenseToBeUpdated;
+                StringBuilder strBTest = new StringBuilder(completeDate);
+                strBTest.setLength(8);
+                String yearMonthDate = strBTest.toString();
+                String fullDate = yearMonthDate + newDateMinusYearMonth;
+
                 System.out.println(expenses.get(expenseToBeUpdated) + ", Date: " + expenseToBeUpdated + "\n // Has been replace with ->");
                 expenses.remove(expenseToBeUpdated);
-                expenses.put(newDate, new Expense(amount, category));
-                System.out.println("Updated " + expenses.get(newDate) + ", New date: " + newDate);
+                expenses.put(fullDate, new Expense(amount, category));
+                System.out.println("Updated " + expenses.get(fullDate) + ", New date: " + fullDate);
             } else {
                 System.out.println("The original date is kept");
                 System.out.println(expenses.get(expenseToBeUpdated) + "\n // Has been replace with ->");
@@ -331,12 +378,11 @@ public class ExpenseStorageServiceClass {
                 System.out.println("Updated " + expenses.get(expenseToBeUpdated));
             }
 
-
-
             FileWriter fw = new FileWriter(path);
             gson.toJson(expenses, fw);
             fw.close();
-        } else {
+        }
+        else {
             System.out.println("No expenses found");
         }
     }
