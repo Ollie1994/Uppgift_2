@@ -38,10 +38,6 @@ public class UserServiceClass {
         String yearS = ldt.format(DateTimeFormatter.ofPattern("yyyy"));
         String monthS = ldt.format(DateTimeFormatter.ofPattern("MM"));
 
-
-
-
-
       /*  StringBuilder yearSb = new StringBuilder(str);
         yearSb.setLength(4);
         String yearS = yearSb.toString();
@@ -60,6 +56,7 @@ public class UserServiceClass {
         System.out.println(monthS);
         */
         //String pathDate = username + password + str;
+
         File test = new File("src/main/userSpecificFiles/" + pathId + "/" + yearS + "/" + monthS);
         test.mkdirs();
         String path = "src/main/userSpecificFiles/" + pathId + "/" + yearS + "/" + monthS + "/" + "Expenses.json";
@@ -74,7 +71,6 @@ public class UserServiceClass {
         LocalDateTime ldt = date;
         String yearS = ldt.format(DateTimeFormatter.ofPattern("yyyy"));
         String monthS = ldt.format(DateTimeFormatter.ofPattern("MM"));
-
 
         /*
         StringBuilder yearSb = new StringBuilder(str);
@@ -91,6 +87,7 @@ public class UserServiceClass {
         System.out.println(monthS);
         */
         //String pathDate = username + password + str;
+
         File test = new File("src/main/userSpecificFiles/" + pathId + "/" + yearS + "/" + monthS);
         test.mkdirs();
         String path = "src/main/userSpecificFiles/" + pathId + "/" + yearS + "/" + monthS + "/" + "Incomes.json";

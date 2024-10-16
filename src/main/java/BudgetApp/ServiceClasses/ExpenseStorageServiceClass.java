@@ -53,33 +53,48 @@ public class ExpenseStorageServiceClass {
         String path = "";
 
 
-        System.out.println("Would you like to use custom date for the expense?(yes/no).");
+        System.out.println("Would you like to create a custom date for the expense?(yes/no).");
         String yesNoChoice = userInputClass.inputUsernamePasswordDateChoice();
 
         if (yesNoChoice.equals("yes")) {
             System.out.println("Type in the custom date (yyyy-MM-dd HH:mm:ss)");
             String createdDate = userInputClass.inputUsernamePasswordDateChoice();
             str = createdDate;
-            String strPath = str;
-            StringBuilder strB = new StringBuilder(strPath);
-            System.out.println(strB.toString());
-            strB.setLength(7);
-            System.out.println(strB.toString());
-            strB.deleteCharAt(strB.length() -3);
-            System.out.println(strB.toString());;
-            strPath = strB.toString();
-            System.out.println(strPath);
-            System.out.println("You have created this new date: " + createdDate + ", path: " + strPath);
-            path = "src/main/userSpecificFiles/" + username + password + "/" + username + password + strPath + "/" + username + password + strPath + "Expenses.json";
-            File test = new File("src/main/userSpecificFiles/" + username + password + "/" + username + password + strPath);
+
+            String yearSYes = str;
+            String monthSYes = str;
+            StringBuilder yearSb = new StringBuilder(yearSYes);
+            yearSb.setLength(4);
+            yearSYes = yearSb.toString();
+            System.out.println(yearSYes);
+
+            StringBuilder monthSb = new StringBuilder(monthSYes);
+            monthSb.setLength(7);
+            monthSb.deleteCharAt(0);
+            monthSb.deleteCharAt(0);
+            monthSb.deleteCharAt(0);
+            monthSb.deleteCharAt(0);
+            monthSb.deleteCharAt(0);
+            monthSYes = monthSb.toString();
+            System.out.println(monthSYes);
+
+            System.out.println("You have created this new date: " + createdDate + ", year: " + yearSYes + ", month: " + monthSYes);
+
+            path = "src/main/userSpecificFiles/" + username + password + "/" + yearSYes + "/" + monthSYes + "/" + "Expenses.json";
+            File test = new File("src/main/userSpecificFiles/" + username + password + "/" + yearSYes + "/" + monthSYes);
             test.mkdirs();
 
         } else {
 
             str = ldtmn.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
             String pathStr = ldt.format(DateTimeFormatter.ofPattern("yyyyMM"));
-            path = "src/main/userSpecificFiles/" + username + password + "/" + username + password + pathStr + "/" + username + password + pathStr + "Expenses.json";
-            File test = new File("src/main/userSpecificFiles/" + username + password + "/" + username + password + pathStr);
+
+            String yearSNo = ldt.format(DateTimeFormatter.ofPattern("yyyy"));
+            String monthSNo = ldt.format(DateTimeFormatter.ofPattern("MM"));
+
+
+            path = "src/main/userSpecificFiles/" + username + password + "/" + yearSNo + "/" + monthSNo + "/" + "Expenses.json";
+            File test = new File("src/main/userSpecificFiles/" + username + password + "/" + yearSNo + "/" + monthSNo);
             test.mkdirs();
         }
 
