@@ -38,7 +38,6 @@ public class ExpenseStorageServiceClass {
 
     //------------------ METHODS ---------------------------------------------------------------
 
-
     public void addExpenseToAllExpensesList(String userName, String password, ExpenseCategory category, String date, double amount) throws IOException {
         try {
             FileReader fr = new FileReader("src/main/userSpecificFiles/" + userName + password + "/" + "allExpenses.json");
@@ -61,8 +60,6 @@ public class ExpenseStorageServiceClass {
         fw.close();
     }
 
-
-
     public void createExpense() throws IOException {
 
         System.out.println("Enter your username");
@@ -77,7 +74,6 @@ public class ExpenseStorageServiceClass {
         LocalDateTime ldtmn = ldt.minusNanos(100);
         String str = "";
         String path = "";
-
 
         System.out.println("Would you like to create a custom date for the expense?(yes/no).");
         String yesNoChoice = userInputClass.inputUsernamePasswordDateChoice();
@@ -149,6 +145,8 @@ public class ExpenseStorageServiceClass {
     }
 
 
+    // ------------------------------------------------------------------------------------------------------------------------------
+
 
     public boolean displayExpensesByDate() throws IOException { // bara för testing
         System.out.println("Enter your username");
@@ -182,6 +180,57 @@ public class ExpenseStorageServiceClass {
         return expensesFound; // ska returna till remove expenses och ändra expenses
     }
 
+    public boolean displayAllExpenses(boolean choice) throws IOException { // bara för testing
+        System.out.println("Enter your username");
+        String username = userInputClass.inputUsernamePasswordDateChoice();
+        System.out.println("Enter your password");
+        String password = userInputClass.inputUsernamePasswordDateChoice();
+        String path = "src/main/userSpecificFiles/" + username + password + "/" +  "Expenses.json";
+
+        boolean expensesFound = true;
+        try {
+            FileReader fr = new FileReader(path);
+            allExpensesJson = new Gson().fromJson(fr, new TypeToken<HashMap<String, Expense>>() {
+            }.getType());
+            if (allExpensesJson == null) {
+                System.out.println("allExpensesJson = null"); // test ta bort sen
+                expensesFound = false;
+            } else {
+                System.out.println("allExpensesJson = not empty"); // test ta bort sen
+                allExpenses = allExpensesJson;
+            }
+            if (choice) {
+                for (String i : allExpenses.keySet()) {
+                    System.out.println("_______________________\nKey - " + i + "\n" + allExpenses.get(i));
+                }
+            }
+            else {
+            }
+            fr.close();
+        } catch (Exception e) {
+            System.out.println("No expenses found");
+            expensesFound = false;
+        }
+        return expensesFound; // ska returna till remove expenses och ändra expenses
+    }
+
+
+    // ------------------------------------------------------------------------------------------------------------------------------
+
+
+    public void deleteAnExpenseFromAllExpensesList(String userName, String password, String date) throws IOException {
+        String path = "src/main/userSpecificFiles/" + userName + password + "/" + "allExpenses.json";
+        boolean expensesFound = displayAllExpenses(false);
+
+        if (expensesFound) {
+            allExpenses.remove(date);
+            FileWriter fw = new FileWriter(path);
+            gson.toJson(allExpenses, fw);
+            fw.close();
+        } else {
+            System.out.println("No expenses found");
+        }
+    }
 
     public void deleteAnExpenseByDate() throws IOException {
         System.out.println("Enter your username");
@@ -190,7 +239,24 @@ public class ExpenseStorageServiceClass {
         String password = userInputClass.inputUsernamePasswordDateChoice();
         System.out.println("Enter the year and month of the expense you would like to remove, (yyyyMM/199408)");
         String date = userInputClass.inputUsernamePasswordDateChoice();
-        String path = "src/main/userSpecificFiles/" + username + password + "/" + username + password + date + "/" + username + password + date + "Expenses.json";
+
+        String yearSYes = date;
+        String monthSYes = date;
+        StringBuilder yearSb = new StringBuilder(yearSYes);
+        yearSb.setLength(4);
+        yearSYes = yearSb.toString();
+        System.out.println(yearSYes);
+
+        StringBuilder monthSb = new StringBuilder(monthSYes);
+        monthSb.setLength(6);
+        monthSb.deleteCharAt(0);
+        monthSb.deleteCharAt(0);
+        monthSb.deleteCharAt(0);
+        monthSb.deleteCharAt(0);
+        monthSYes = monthSb.toString();
+        System.out.println(monthSYes);
+
+        String path = "src/main/userSpecificFiles/" + username + password + "/" + yearSYes + "/" + monthSYes + "/" + "Expenses.json";
 
         boolean expensesFound = displayExpensesByDate();
 
@@ -202,10 +268,14 @@ public class ExpenseStorageServiceClass {
             FileWriter fw = new FileWriter(path);
             gson.toJson(expenses, fw);
             fw.close();
+            deleteAnExpenseFromAllExpensesList(username, password, expenseToBeRemoved);
         } else {
             System.out.println("No expenses found");
         }
     }
+
+
+    // ------------------------------------------------------------------------------------------------------------------------------
 
 
     public void updateAnExpenseByDate() throws IOException {
