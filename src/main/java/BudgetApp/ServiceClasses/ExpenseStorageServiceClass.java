@@ -26,7 +26,8 @@ public class ExpenseStorageServiceClass {
     Gson gson = new GsonBuilder().setPrettyPrinting().create();
     UserServiceClass userServiceClass = new UserServiceClass();
     HashMap<String, Expense> expensesJson = new HashMap<String, Expense>();
-
+    HashMap<String, Expense> allExpenses = new HashMap<String, Expense>();
+    HashMap<String, Expense> allExpensesJson = new HashMap<String, Expense>();
 
 
 
@@ -36,6 +37,31 @@ public class ExpenseStorageServiceClass {
 
 
     //------------------ METHODS ---------------------------------------------------------------
+
+
+    public void addExpenseToAllExpensesList(String userName, String password, ExpenseCategory category, String date, double amount) throws IOException {
+        try {
+            FileReader fr = new FileReader("src/main/userSpecificFiles/" + userName + password + "/" + "allExpenses.json");
+            allExpensesJson = new Gson().fromJson(fr, new TypeToken<HashMap<String, Expense>>() {
+            }.getType());
+            if (allExpensesJson == null) {
+                System.out.println("allExpensesJson = null"); // test ta bort sen
+            } else {
+                System.out.println("allExpensesJson = not empty"); // test ta bort sen
+                allExpenses = allExpensesJson;
+            }
+            fr.close();
+        } catch (Exception e) {
+            System.out.println("catch ?");
+        }
+        allExpenses.put(date, new Expense(amount, category));
+        System.out.println("You have successfully created a new expense with category " + category + " and amount " + amount);
+        FileWriter fw = new FileWriter("src/main/userSpecificFiles/" + userName + password + "/" + "allExpenses.json");
+        gson.toJson(allExpenses, fw);
+        fw.close();
+    }
+
+
 
     public void createExpense() throws IOException {
 
@@ -119,6 +145,7 @@ public class ExpenseStorageServiceClass {
         FileWriter fw = new FileWriter(path);
         gson.toJson(expenses, fw);
         fw.close();
+        addExpenseToAllExpensesList(username, password, category, str, amount); // lägger till expenses till en ALL expense fil.
     }
 
 
