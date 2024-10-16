@@ -37,10 +37,32 @@ public class UserServiceClass {
         LocalDateTime ldt = date;
         String str = ldt.format(DateTimeFormatter.ofPattern("yyyyMM"));
         System.out.println(str);
-        String pathDate = username + password + str;
-        File test = new File("src/main/userSpecificFiles/" + pathId + "/" + pathDate);
+
+        StringBuilder yearSb = new StringBuilder(str);
+        yearSb.setLength(4);
+        String yearS = yearSb.toString();
+        System.out.println(yearS);
+
+        System.out.println("STR = " + str);
+        StringBuilder monthSb = new StringBuilder(str);
+        monthSb.deleteCharAt(0);
+        System.out.println(monthSb);
+        monthSb.deleteCharAt(0);
+        System.out.println(monthSb);
+        monthSb.deleteCharAt(0);
+        System.out.println(monthSb);
+        monthSb.deleteCharAt(0);
+        String monthS = monthSb.toString();
+        System.out.println(monthS);
+
+
+
+
+
+        //String pathDate = username + password + str;
+        File test = new File("src/main/userSpecificFiles/" + pathId + "/" + yearS + "/" + monthS);
         test.mkdirs();
-        String path = "src/main/userSpecificFiles/" + pathId + "/" + pathDate + "/" + pathDate + "Expenses" + ".json";
+        String path = "src/main/userSpecificFiles/" + pathId + "/" + yearS + "/" + monthS + "/" + "Expenses.json";
         System.out.println("Path = " + path);
         FileWriter fw = new FileWriter(path);
         fw.close();
@@ -52,10 +74,29 @@ public class UserServiceClass {
         LocalDateTime ldt = date;
         String str = ldt.format(DateTimeFormatter.ofPattern("yyyyMM"));
         System.out.println(str);
-        String pathDate = username + password + str;
-        File test = new File("src/main/userSpecificFiles/" + pathId + "/" + pathDate);
+
+
+        StringBuilder yearSb = new StringBuilder(str);
+        yearSb.setLength(4);
+        String yearS = yearSb.toString();
+        System.out.println(yearS);
+
+        StringBuilder monthSb = new StringBuilder(str);
+        monthSb.deleteCharAt(0);
+        monthSb.deleteCharAt(0);
+        monthSb.deleteCharAt(0);
+        monthSb.deleteCharAt(0);
+        String monthS = monthSb.toString();
+        System.out.println(monthS);
+
+
+
+
+
+        //String pathDate = username + password + str;
+        File test = new File("src/main/userSpecificFiles/" + pathId + "/" + yearS + "/" + monthS);
         test.mkdirs();
-        String path = "src/main/userSpecificFiles/" + pathId + "/" + pathDate + "/" + pathDate + "Incomes" + ".json";
+        String path = "src/main/userSpecificFiles/" + pathId + "/" + yearS + "/" + monthS + "/" + "Incomes.json";
         System.out.println("Path = " + path);
         FileWriter fw = new FileWriter(path);
         fw.close();
