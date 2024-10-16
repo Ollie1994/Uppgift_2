@@ -35,10 +35,14 @@ public class UserServiceClass {
     public String createUserSpecificFileForExpenses(String username, String password, LocalDateTime date) throws IOException {
         String pathId = username + password;
         LocalDateTime ldt = date;
-        String str = ldt.format(DateTimeFormatter.ofPattern("yyyyMM"));
-        System.out.println(str);
+        String yearS = ldt.format(DateTimeFormatter.ofPattern("yyyy"));
+        String monthS = ldt.format(DateTimeFormatter.ofPattern("MM"));
 
-        StringBuilder yearSb = new StringBuilder(str);
+
+
+
+
+      /*  StringBuilder yearSb = new StringBuilder(str);
         yearSb.setLength(4);
         String yearS = yearSb.toString();
         System.out.println(yearS);
@@ -54,11 +58,7 @@ public class UserServiceClass {
         monthSb.deleteCharAt(0);
         String monthS = monthSb.toString();
         System.out.println(monthS);
-
-
-
-
-
+        */
         //String pathDate = username + password + str;
         File test = new File("src/main/userSpecificFiles/" + pathId + "/" + yearS + "/" + monthS);
         test.mkdirs();
@@ -72,10 +72,11 @@ public class UserServiceClass {
     public String createUserSpecificFileForIncomes(String username, String password, LocalDateTime date) throws IOException {
         String pathId = username + password;
         LocalDateTime ldt = date;
-        String str = ldt.format(DateTimeFormatter.ofPattern("yyyyMM"));
-        System.out.println(str);
+        String yearS = ldt.format(DateTimeFormatter.ofPattern("yyyy"));
+        String monthS = ldt.format(DateTimeFormatter.ofPattern("MM"));
 
 
+        /*
         StringBuilder yearSb = new StringBuilder(str);
         yearSb.setLength(4);
         String yearS = yearSb.toString();
@@ -88,11 +89,7 @@ public class UserServiceClass {
         monthSb.deleteCharAt(0);
         String monthS = monthSb.toString();
         System.out.println(monthS);
-
-
-
-
-
+        */
         //String pathDate = username + password + str;
         File test = new File("src/main/userSpecificFiles/" + pathId + "/" + yearS + "/" + monthS);
         test.mkdirs();
