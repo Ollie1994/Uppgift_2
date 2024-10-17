@@ -11,12 +11,12 @@
     "category": "SAVINGS",
     "amount": 10.0
   },
-  "2024-10-16 15:50:22": {
-    "category": "TRAVEL",
-    "amount": 2222.0
-  },
   "2024-10-13 12:11:10": {
     "category": "RECREATION",
     "amount": 1120.0
+  },
+  "2024-10-17 17:12:08": {
+    "category": "HOUSING",
+    "amount": 98765.0
   }
 }
