@@ -24,7 +24,7 @@ import java.util.HashMap;
 public class ExpenseStorageServiceClass {
     UserInputClass userInputClass = new UserInputClass();
     Gson gson = new GsonBuilder().setPrettyPrinting().create();
-    UserServiceClass userServiceClass = new UserServiceClass();
+    LoggedInServiceClass loggedInServiceClass = new LoggedInServiceClass();
     HashMap<String, Expense> expenses = new HashMap<String, Expense>();
     HashMap<String, Expense> expensesJson = new HashMap<String, Expense>();
     HashMap<String, Expense> allExpenses = new HashMap<String, Expense>();
@@ -64,7 +64,7 @@ public class ExpenseStorageServiceClass {
 
     public void createExpense() throws IOException {
 
-        String userNameAndPassword = userServiceClass.userCurrentlyLoggedIn();
+        String userNameAndPassword = loggedInServiceClass.userCurrentlyLoggedIn();
 
         System.out.println("Pick a category");
         ExpenseCategory category = ExpenseCategory.valueOf(userInputClass.inputEnumCategoryChoice()); // byt till annan tC
@@ -157,7 +157,7 @@ public class ExpenseStorageServiceClass {
         System.out.println("Enter the year and month of the expenses you would like to checkout, (yyyyMM/199408)");
         String date = userInputClass.inputUsernamePasswordDateChoice();
         */
-        String userNameAndPassword = userServiceClass.userCurrentlyLoggedIn();
+        String userNameAndPassword = loggedInServiceClass.userCurrentlyLoggedIn();
 
         String yearSYes = date;
         String monthSYes = date;
@@ -204,7 +204,7 @@ public class ExpenseStorageServiceClass {
 
 
 
-        String userNameAndPassword = userServiceClass.userCurrentlyLoggedIn();
+        String userNameAndPassword = loggedInServiceClass.userCurrentlyLoggedIn();
 
         String path = "src/main/userSpecificFiles/" + userNameAndPassword + "/" +  "allExpenses.json";
 
@@ -241,7 +241,7 @@ public class ExpenseStorageServiceClass {
 
     public void deleteAnExpenseFromAllExpensesList(String date) throws IOException {
 
-        String userNameAndPassword = userServiceClass.userCurrentlyLoggedIn();
+        String userNameAndPassword = loggedInServiceClass.userCurrentlyLoggedIn();
 
         String path = "src/main/userSpecificFiles/" + userNameAndPassword + "/" + "allExpenses.json";
 
@@ -259,7 +259,7 @@ public class ExpenseStorageServiceClass {
 
     public void deleteAnExpenseByDate() throws IOException {
 
-        String userNameAndPassword = userServiceClass.userCurrentlyLoggedIn();
+        String userNameAndPassword = loggedInServiceClass.userCurrentlyLoggedIn();
 
 
         System.out.println("Enter the year and month of the expense you would like to remove, (yyyyMM/199408)");
@@ -305,7 +305,7 @@ public class ExpenseStorageServiceClass {
 
     public void updateAnExpenseFromAllExpensesList(ExpenseCategory category, double amount, String newDate, String oldDate) throws IOException {
 
-        String userNameAndPassword = userServiceClass.userCurrentlyLoggedIn();
+        String userNameAndPassword = loggedInServiceClass.userCurrentlyLoggedIn();
 
         String path = "src/main/userSpecificFiles/" + userNameAndPassword + "/" + "allExpenses.json";
 
@@ -324,7 +324,7 @@ public class ExpenseStorageServiceClass {
 
     public void updateAnExpenseByDate() throws IOException {
 
-        String userNameAndPassword = userServiceClass.userCurrentlyLoggedIn();
+        String userNameAndPassword = loggedInServiceClass.userCurrentlyLoggedIn();
 
         System.out.println("Enter the year and month of the expense you would like to update, (yyyyMM/199408)");
         String date = userInputClass.inputUsernamePasswordDateChoice();

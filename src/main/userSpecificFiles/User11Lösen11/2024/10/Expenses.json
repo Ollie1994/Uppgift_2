@@ -3,6 +3,10 @@
     "category": "OTHER",
     "amount": 12345.0
   },
+  "2024-10-17 16:52:46": {
+    "category": "SAVINGS",
+    "amount": 10.0
+  },
   "2024-10-16 15:50:22": {
     "category": "TRAVEL",
     "amount": 2222.0
