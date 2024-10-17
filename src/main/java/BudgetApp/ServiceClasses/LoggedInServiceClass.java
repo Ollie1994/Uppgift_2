@@ -10,7 +10,7 @@ import java.io.IOException;
 
 public class LoggedInServiceClass {
     /*
-    Denna klassen existerar bara för att annars blir det
+    Denna klassen existerar bara för att annars blir det:
     ExpenseStorageServiceClass expenseStorageServiceClass = new ExpenseStorageServiceClass();
     kallar på
     UserServiceClass userServiceClass = new UserServiceClass();
@@ -18,8 +18,7 @@ public class LoggedInServiceClass {
     ExpenseStorageServiceClass expenseStorageServiceClass = new ExpenseStorageServiceClass();
     vilket kallar på
     UserServiceClass userServiceClass = new UserServiceClass();
-    i en oändlig looooOOOOOooop
-    tills det kastar ett fel.
+    i en oändlig looooOOOOOooop, tills det kastar ett fel(1000fel).
      */
     Gson gson = new GsonBuilder().setPrettyPrinting().create();
     String userLoggedInJson;
