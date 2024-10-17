@@ -26,6 +26,7 @@ public class UserServiceClass {
     HashMap<String, User> users = new HashMap<String, User>();
     HashMap<String, User> usersJson = new HashMap<String, User>(); // bara för enkelhetens skull för att hämta en tom fil sätter hashmappen till mnul och gör den svå att använda
     Gson gson = new GsonBuilder().setPrettyPrinting().create();
+    ExpenseStorageServiceClass expenseStorageServiceClass = new ExpenseStorageServiceClass();
     String userLoggedInJson;
     String userLoggedIn;
 
@@ -157,7 +158,13 @@ public class UserServiceClass {
                     if (userName.equals(user.getUserName()) && password.equals(user.getPassword())) {
                         System.out.println("You have successfully logged in!");
                         loggedIn = true;
+                        // WIPEEE MAPS så dem hålls inte minglar med varandra när ajg byter user
+                        expenseStorageServiceClass.expenses.clear();
+                        expenseStorageServiceClass.expensesJson.clear();
+                        expenseStorageServiceClass.allExpenses.clear();
+                        expenseStorageServiceClass.allExpensesJson.clear();
                         updateUserLoggedIn(userName, password);
+
                     }
                 }
             } catch (NullPointerException e) {
