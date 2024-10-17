@@ -4,7 +4,6 @@
 // https://stackoverflow.com/questions/3634853/how-to-create-a-directory-in-java
 // https://bito.ai/resources/java-localdatetime-to-string-java-explained/#5
 
-
 package BudgetApp.ServiceClasses;
 
 import BudgetApp.InputClasses.UserInputClass;
@@ -27,7 +26,8 @@ public class UserServiceClass {
     HashMap<String, User> users = new HashMap<String, User>();
     HashMap<String, User> usersJson = new HashMap<String, User>(); // bara för enkelhetens skull för att hämta en tom fil sätter hashmappen till mnul och gör den svå att använda
     Gson gson = new GsonBuilder().setPrettyPrinting().create();
-
+    String userLoggedInJson;
+    String userLoggedIn;
 
 
 
@@ -157,6 +157,7 @@ public class UserServiceClass {
                     if (userName.equals(user.getUserName()) && password.equals(user.getPassword())) {
                         System.out.println("You have successfully logged in!");
                         loggedIn = true;
+                        updateUserLoggedIn(userName, password);
                     }
                 }
             } catch (NullPointerException e) {
@@ -206,6 +207,36 @@ public class UserServiceClass {
         }
         return usersFound;
     }
+
+    public String userCurrentlyLoggedIn() throws IOException { // bara för testing
+        try {
+            FileReader fr = new FileReader("src/main/userLoggedIn.json");
+            userLoggedInJson = new Gson().fromJson(fr, new TypeToken<>() { // kolla om vi behöver något inom <>
+            }.getType());
+            if (userLoggedInJson == null) {
+                System.out.println("userLoggedInJson = null"); // test ta bort sen
+
+            } else {
+                System.out.println("userLoggedInJson = not empty"); // test ta bort sen
+                userLoggedIn = userLoggedInJson;
+            }
+            System.out.println("User currently logged in: " + userLoggedIn);
+            fr.close();
+        } catch (Exception e) {
+            System.out.println("No users found");
+
+        }
+        return userLoggedIn;
+
+    }
+
+    public void updateUserLoggedIn(String userName, String password) throws IOException {
+        String user = userName + password;
+        FileWriter fw = new FileWriter("src/main/userLoggedIn.json");
+        gson.toJson(user, fw);
+        fw.close();
+    }
+
 
 
 

@@ -57,13 +57,9 @@ public class BudgetTrackerMain {
                         expenseStorageServiceClass.createExpense();
                         break;
                     case 4:
-                        System.out.println("Please enter ur username");
-                        String username = userInputClass.inputUsernamePasswordDateChoice();
-                        System.out.println("Please enter your password");
-                        String password = userInputClass.inputUsernamePasswordDateChoice();
                         System.out.println("Enter the year and month of the expenses you would like to checkout, (yyyyMM/199408)");
                         String date = userInputClass.inputUsernamePasswordDateChoice();
-                        expenseStorageServiceClass.displayExpensesByDate(username, password, date);
+                        expenseStorageServiceClass.displayExpensesByDate(date);
                         break;
                     case 5:
                         expenseStorageServiceClass.deleteAnExpenseByDate();
@@ -72,11 +68,7 @@ public class BudgetTrackerMain {
                         expenseStorageServiceClass.updateAnExpenseByDate();
                         break;
                     case 7:
-                        System.out.println("Please enter ur username");
-                        String userName = userInputClass.inputUsernamePasswordDateChoice();
-                        System.out.println("Please enter your password");
-                        String passWord = userInputClass.inputUsernamePasswordDateChoice();
-                        expenseStorageServiceClass.displayAllExpenses(true, userName, passWord);
+                        expenseStorageServiceClass.displayAllExpenses(true);
                         break;
                         //case 8:
 
