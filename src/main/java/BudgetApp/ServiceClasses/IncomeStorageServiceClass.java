@@ -43,7 +43,7 @@ public class IncomeStorageServiceClass {
             allIncomesJson = new Gson().fromJson(fr, new TypeToken<HashMap<String, Income>>() {
             }.getType());
             if (allIncomesJson == null) {
-                System.out.println("allExpensesJson = null"); // test ta bort sen
+                System.out.println("allIncomesJson = null"); // test ta bort sen
             } else {
                 System.out.println("allIncomesJson = not empty"); // test ta bort sen
                 allIncomes = allIncomesJson;
@@ -151,7 +151,7 @@ public class IncomeStorageServiceClass {
         String username = userInputClass.inputUsernamePasswordDateChoice();
         System.out.println("Enter your password");
         String password = userInputClass.inputUsernamePasswordDateChoice();
-        System.out.println("Enter the year and month of the expenses you would like to checkout, (yyyyMM/199408)");
+        System.out.println("Enter the year and month of the incomes you would like to checkout, (yyyyMM/199408)");
         String date = userInputClass.inputUsernamePasswordDateChoice();
         */
         String userNameAndPassword = loggedInServiceClass.userCurrentlyLoggedIn();
