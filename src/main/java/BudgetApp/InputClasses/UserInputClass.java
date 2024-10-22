@@ -9,6 +9,8 @@ import java.util.Scanner;
 // och gör det lättare att hålla main så ren som möjligt.
 public class UserInputClass {
 
+
+
     public int inputStartMenuChoice() {
         int input = 0;
         while (input <= 0 || input > 4) {
@@ -26,14 +28,13 @@ public class UserInputClass {
         return input;
     }
 
-
     public int inputMainMenuChoice() {
         int input = 0;
-        while (input <= 0 || input > 7) {
+        while (input <= 0 || input > 8) {
             try {
                 Scanner sc = new Scanner(System.in);
                 input = sc.nextInt();
-                if (input <= 0 || input > 7) {
+                if (input <= 0 || input > 8) {
                     System.out.println("Invalid input!");
                 }
             } catch (Exception e) {
@@ -43,12 +44,6 @@ public class UserInputClass {
         }
         return input;
     }
-
-
-
-
-
-
 
     public String inputUsernamePasswordDateChoice() {
         String input = "";
@@ -87,7 +82,7 @@ public class UserInputClass {
         String finalCategory = null;
         while (finalCategory == null) {
             try {
-                System.out.println("Would you like to add an expense or income?");
+                System.out.println("please type in the type of category you want (expense/income)?");
                 String choice = sc.next();
                 switch (choice) {
                     case "expense":

@@ -44,7 +44,7 @@ public class BudgetTrackerMain {
                 //MENY 2
                 System.out.println("\nMain Menu\n1. Back to start menu\n2. Display all accounts (test val)\n3. Add an expense" +
                         "\n4. Display expenses by date\n5. Delete an expense by date\n6. Update an expense by date\n7. Display all expenses" +
-                        "\n8. ------");
+                        "\n8. Search for e specific expense by category and amount");
                 int mainMenu = userInputClass.inputMainMenuChoice(); // skicka in något här som ändra trycatchen till att tilåta flera val
                 switch (mainMenu) {
                     case 1:
@@ -70,7 +70,9 @@ public class BudgetTrackerMain {
                     case 7:
                         expenseStorageServiceClass.displayAllExpenses(true);
                         break;
-                        //case 8:
+                    case 8:
+                        expenseStorageServiceClass.searchForSpecificExpenseByCategoryAndAmount();
+                        break;
 
 
 

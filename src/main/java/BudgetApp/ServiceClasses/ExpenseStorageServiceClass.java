@@ -397,7 +397,47 @@ public class ExpenseStorageServiceClass {
 
 
     //------------------------------------------------------------------------------------------------------------
+    public void searchForSpecificExpenseByCategoryAndAmount() throws IOException {
 
+        System.out.println("whats the category of the expense you want to search for");
+        ExpenseCategory category = ExpenseCategory.valueOf(userInputClass.inputEnumCategoryChoice());
+        System.out.println("whats the amount of the expense you want to search for");
+        double amount = userInputClass.inputAmountChoice();
+
+        String userNameAndPassword = loggedInServiceClass.userCurrentlyLoggedIn();
+
+        String path = "src/main/userSpecificFiles/" + userNameAndPassword + "/" +  "allExpenses.json";
+        boolean matched = false;
+        try {
+            FileReader fr = new FileReader(path);
+            allExpensesJson = new Gson().fromJson(fr, new TypeToken<HashMap<String, Expense>>() {
+            }.getType());
+            if (allExpensesJson == null) {
+                System.out.println("allExpensesJson = null"); // test ta bort sen
+            } else {
+                System.out.println("allExpensesJson = not empty"); // test ta bort sen
+                allExpenses = allExpensesJson;
+            }
+            for (Expense i : allExpenses.values()) {
+                if (category.equals(i.getCategory()) && amount == i.getAmount()) {
+                    for (String y : allExpenses.keySet()) {
+                        if (allExpenses.get(y).getCategory().equals(i.getCategory()) && allExpenses.get(y).getAmount() == i.getAmount()) {
+                            System.out.println("This is the expense you searched for ");
+                            System.out.println("Date: " + y + "\n" + allExpenses.get(y));
+                            matched = true;
+                        }
+                    }
+                }
+            }
+            if (matched == false) {
+                System.out.println("The expense you searched for does not exist");
+            }
+            fr.close();
+        } catch (Exception e) {
+            System.out.println("No expenses found");
+
+        }
+    }
 
 
 
