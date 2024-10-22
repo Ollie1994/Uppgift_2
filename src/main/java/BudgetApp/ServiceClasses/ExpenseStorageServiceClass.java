@@ -397,6 +397,8 @@ public class ExpenseStorageServiceClass {
 
 
     //------------------------------------------------------------------------------------------------------------
+
+
     public void searchForSpecificExpenseByCategoryAndAmount() throws IOException {
 
         System.out.println("whats the category of the expense you want to search for");
