@@ -43,7 +43,7 @@ public class IncomeStorageServiceClass {
             allIncomesJson = new Gson().fromJson(fr, new TypeToken<HashMap<String, Income>>() {
             }.getType());
             if (allIncomesJson == null) {
-                System.out.println("allIncomesJson = null"); // test ta bort sen
+                System.out.println("allExpensesJson = null"); // test ta bort sen
             } else {
                 System.out.println("allIncomesJson = not empty"); // test ta bort sen
                 allIncomes = allIncomesJson;
