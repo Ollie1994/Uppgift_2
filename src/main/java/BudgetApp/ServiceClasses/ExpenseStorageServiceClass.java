@@ -22,9 +22,11 @@ import java.time.format.DateTimeFormatter;
 import java.util.HashMap;
 
 public class ExpenseStorageServiceClass {
+
     UserInputClass userInputClass = new UserInputClass();
     Gson gson = new GsonBuilder().setPrettyPrinting().create();
     LoggedInServiceClass loggedInServiceClass = new LoggedInServiceClass();
+
     HashMap<String, Expense> expenses = new HashMap<String, Expense>();
     HashMap<String, Expense> expensesJson = new HashMap<String, Expense>();
     HashMap<String, Expense> allExpenses = new HashMap<String, Expense>();

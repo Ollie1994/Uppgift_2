@@ -2,6 +2,7 @@ package BudgetApp.Main;
 
 import BudgetApp.InputClasses.UserInputClass;
 import BudgetApp.ServiceClasses.ExpenseStorageServiceClass;
+import BudgetApp.ServiceClasses.IncomeStorageServiceClass;
 import BudgetApp.ServiceClasses.UserServiceClass;
 
 import java.io.IOException;
@@ -11,7 +12,7 @@ public class BudgetTrackerMain {
         UserInputClass userInputClass = new UserInputClass();
         UserServiceClass userServiceClass = new UserServiceClass();
         ExpenseStorageServiceClass expenseStorageServiceClass = new ExpenseStorageServiceClass();
-
+        IncomeStorageServiceClass incomeStorageServiceClass = new IncomeStorageServiceClass();
 
 
 
@@ -38,13 +39,16 @@ public class BudgetTrackerMain {
 
             //while loop så länge man är inloggad
 
-            /// LÄgg till mer i trycatch före att hantera större meny
-            // gört ny trycatch för Main menu!!!!!
+
             while (loggedIn == true) {
                 //MENY 2
                 System.out.println("\nMain Menu\n1. Back to start menu\n2. Display all accounts (test val)\n3. Add an expense" +
                         "\n4. Display expenses by date\n5. Delete an expense by date\n6. Update an expense by date\n7. Display all expenses" +
-                        "\n8. Search for e specific expense by category and amount");
+                        "\n8. Search for e specific expense by category and amount\n9. Add an income" +
+                        "\n10. Display incomes by date\n11. Delete an income by date\n12. Update an income by date" +
+                        "\n13. Display all incomes\n14. Search for e specific income by category and amount" +
+                        "\n15");
+
                 int mainMenu = userInputClass.inputMainMenuChoice(); // skicka in något här som ändra trycatchen till att tilåta flera val
                 switch (mainMenu) {
                     case 1:
@@ -73,6 +77,27 @@ public class BudgetTrackerMain {
                     case 8:
                         expenseStorageServiceClass.searchForSpecificExpenseByCategoryAndAmount();
                         break;
+                    case 9:
+                        incomeStorageServiceClass.createIncome();
+                        break;
+                    case 10:
+                        System.out.println("Enter the year and month of the incomes you would like to checkout, (yyyyMM/199408)");
+                        String date2 = userInputClass.inputUsernamePasswordDateChoice();
+                        incomeStorageServiceClass.displayIncomesByDate(date2);
+                        break;
+                    case 11:
+                        incomeStorageServiceClass.deleteAnIncomeByDate();
+                        break;
+                    case 12:
+                        incomeStorageServiceClass.updateAnIncomeByDate();
+                        break;
+                    case 13:
+                        incomeStorageServiceClass.displayAllIncomes(true);
+                        break;
+                    case 14:
+                        incomeStorageServiceClass.searchForSpecificIncomeByCategoryAndAmount();
+                        break;
+
 
 
 

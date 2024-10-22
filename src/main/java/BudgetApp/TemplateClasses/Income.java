@@ -12,10 +12,10 @@ public class Income extends Transaction {
     }
 
 
-
-
-
-
+    @Override
+    public String toString() {
+        return "Income\n- Category: " + category + "\n- Amount: " + getAmount();
+    }
 
     public IncomeCategory getCategory() {return category;}
     public void setCategory(IncomeCategory category) {this.category = category;}
