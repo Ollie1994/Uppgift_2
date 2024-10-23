@@ -18,22 +18,26 @@ public class BudgetTrackerMain {
 
         boolean loggedIn = false;
         while (loggedIn == false) {
-            System.out.println("Start Menu\n1. Create a new account\n2. Login\n3. Delete an account\n4. Exit");
+            System.out.println("Start Menu\n1. Exit\n2. Login\n3. Create a new account");
             int startMenu = userInputClass.inputStartMenuChoice();
             switch (startMenu) {
                 case 1:
-                    userServiceClass.createAccount();
+                    System.exit(0);
                     break;
+                    //userServiceClass.createAccount();
+                    //break;
                 case 2:
                     loggedIn = userServiceClass.login();
                     //System.out.println(loggedIn); // test ta bort sen
                     break;
                 case 3:
-                    userServiceClass.deleteAccount();
+                    //userServiceClass.deleteAccount(); // denna bara för admin / test
+                    //break;
+                    userServiceClass.createAccount();
                     break;
-                case 4:
-                    System.exit(0);
-                    break;
+                //case 4:
+                    //System.exit(0);
+                    //break;
 
             }
 
@@ -47,7 +51,7 @@ public class BudgetTrackerMain {
                         "\n8. Search for e specific expense by category and amount\n9. Add an income" +
                         "\n10. Display incomes by date\n11. Delete an income by date\n12. Update an income by date" +
                         "\n13. Display all incomes\n14. Search for e specific income by category and amount" +
-                        "\n15");
+                        "\n15. Calculate total for all expenses\n16. Calculate total for all incomes");
 
                 int mainMenu = userInputClass.inputMainMenuChoice(); // skicka in något här som ändra trycatchen till att tilåta flera val
                 switch (mainMenu) {
@@ -55,7 +59,7 @@ public class BudgetTrackerMain {
                         loggedIn = false; // istället för EXIT så loopar vi runt till början igen genom att logga ut?
                         break;
                     case 2:
-                        userServiceClass.displayAccounts(); // bara för test
+                        userServiceClass.displayAccounts(); // bara för admin / test
                         break;
                     case 3:
                         expenseStorageServiceClass.createExpense();
@@ -96,6 +100,12 @@ public class BudgetTrackerMain {
                         break;
                     case 14:
                         incomeStorageServiceClass.searchForSpecificIncomeByCategoryAndAmount();
+                        break;
+                    case 15:
+                        expenseStorageServiceClass.calculateTotalForAllExpenses();
+                        break;
+                    case 16:
+                        incomeStorageServiceClass.calculateTotalForAllIncomes();
                         break;
 
 

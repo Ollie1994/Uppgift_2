@@ -444,12 +444,45 @@ public class ExpenseStorageServiceClass {
     }
 
 
+    //------------------------------------------------------------------------------------------------------------
+
+
+    public boolean calculateTotalForAllExpenses() throws IOException { // bara för testing
+
+        String userNameAndPassword = loggedInServiceClass.userCurrentlyLoggedIn();
+
+        String path = "src/main/userSpecificFiles/" + userNameAndPassword + "/" + "allExpenses.json";
+
+        boolean expensesFound = true;
+        try {
+            FileReader fr = new FileReader(path);
+            allExpensesJson = new Gson().fromJson(fr, new TypeToken<HashMap<String, Expense>>() {
+            }.getType());
+            if (allExpensesJson == null) {
+                System.out.println("allExpensesJson = null"); // test ta bort sen
+                expensesFound = false;
+            }
+            else {
+                System.out.println("allExpensesJson = not empty"); // test ta bort sen
+                allExpenses = allExpensesJson;
+            }
+            double total = 0;
+            for (Expense i : allExpenses.values()) {
+                total += i.getAmount();
+                System.out.println("Total: " + total);
+            }
+            System.out.println("The total for all the expenses are: " + total);
+
+            fr.close();
+        } catch (Exception e) {
+            System.out.println("No expenses found");
+            expensesFound = false;
+        }
+        return expensesFound;
+    }
 
 
 
-
-
-// overide methods from trans som skirver ut kategory amount och all annat
 
 
 

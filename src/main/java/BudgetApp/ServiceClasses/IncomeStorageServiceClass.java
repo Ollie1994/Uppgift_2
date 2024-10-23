@@ -446,12 +446,49 @@ public class IncomeStorageServiceClass {
     }
 
 
+    //----------------------------------------------------------------------------------------------------------------
+
+
+    public boolean calculateTotalForAllIncomes() throws IOException { // bara för testing
+
+        String userNameAndPassword = loggedInServiceClass.userCurrentlyLoggedIn();
+
+        String path = "src/main/userSpecificFiles/" + userNameAndPassword + "/" + "allIncomes.json";
+
+        boolean incomesFound = true;
+        try {
+            FileReader fr = new FileReader(path);
+            allIncomesJson = new Gson().fromJson(fr, new TypeToken<HashMap<String, Income>>() {
+            }.getType());
+            if (allIncomesJson == null) {
+                System.out.println("allIncomesJson = null"); // test ta bort sen
+                incomesFound = false;
+            }
+            else {
+                System.out.println("allIncomesJson = not empty"); // test ta bort sen
+                allIncomes = allIncomesJson;
+            }
+            double total = 0;
+            for (Income i : allIncomes.values()) {
+                total += i.getAmount();
+                System.out.println("Total: " + total);
+            }
+            System.out.println("The total for all the incomes are: " + total);
+
+            fr.close();
+        } catch (Exception e) {
+            System.out.println("No incomes found");
+            incomesFound = false;
+        }
+        return incomesFound;
+    }
 
 
 
 
 
-// overide methods from trans som skirver ut kategory amount och all annat
+
+
 
 
 

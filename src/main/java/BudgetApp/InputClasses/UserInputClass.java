@@ -13,11 +13,11 @@ public class UserInputClass {
 
     public int inputStartMenuChoice() {
         int input = 0;
-        while (input <= 0 || input > 4) {
+        while (input <= 0 || input > 3) {
             try {
                 Scanner sc = new Scanner(System.in);
                 input = sc.nextInt();
-                if (input <= 0 || input > 4) {
+                if (input <= 0 || input > 3) {
                     System.out.println("Invalid input!");
                 }
             } catch (Exception e) {
@@ -30,11 +30,11 @@ public class UserInputClass {
 
     public int inputMainMenuChoice() {
         int input = 0;
-        while (input <= 0 || input > 14) {
+        while (input <= 0 || input > 16) {
             try {
                 Scanner sc = new Scanner(System.in);
                 input = sc.nextInt();
-                if (input <= 0 || input > 14) {
+                if (input <= 0 || input > 16) {
                     System.out.println("Invalid input!");
                 }
             } catch (Exception e) {
@@ -89,7 +89,7 @@ public class UserInputClass {
                         for (ExpenseCategory category : ExpenseCategory.values()) {
                             System.out.println(category);
                         }
-                        System.out.println("Please enter the expense category");
+                        System.out.println("Please enter the expense category (ALLCAPITALLETTERS)");
                         category_exCa = ExpenseCategory.valueOf(sc.next());
                         finalCategory = String.valueOf(category_exCa); // föreslog wrap så vi testar det
                         break;
@@ -97,7 +97,7 @@ public class UserInputClass {
                         for (IncomeCategory category : IncomeCategory.values()) {
                             System.out.println(category);
                         }
-                        System.out.println("Please enter the income category");
+                        System.out.println("Please enter the income category(ALLCAPITALLETTERS)");
                         category_inCa = IncomeCategory.valueOf(sc.next());
                         finalCategory = String.valueOf(category_inCa);
                         break;
