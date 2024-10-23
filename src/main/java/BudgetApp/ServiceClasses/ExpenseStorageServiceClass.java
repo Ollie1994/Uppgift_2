@@ -447,44 +447,86 @@ public class ExpenseStorageServiceClass {
     //------------------------------------------------------------------------------------------------------------
 
 
-    public boolean calculateTotalForAllExpenses() throws IOException { // bara för testing
+    public double calculateTotalForAllExpenses() throws IOException {
 
         String userNameAndPassword = loggedInServiceClass.userCurrentlyLoggedIn();
 
         String path = "src/main/userSpecificFiles/" + userNameAndPassword + "/" + "allExpenses.json";
+        double total = 0;
 
-        boolean expensesFound = true;
         try {
             FileReader fr = new FileReader(path);
             allExpensesJson = new Gson().fromJson(fr, new TypeToken<HashMap<String, Expense>>() {
             }.getType());
             if (allExpensesJson == null) {
                 System.out.println("allExpensesJson = null"); // test ta bort sen
-                expensesFound = false;
             }
             else {
                 System.out.println("allExpensesJson = not empty"); // test ta bort sen
                 allExpenses = allExpensesJson;
             }
-            double total = 0;
             for (Expense i : allExpenses.values()) {
                 total += i.getAmount();
-                System.out.println("Total: " + total);
+                System.out.println("Total: " + total); // test purpose
             }
             System.out.println("The total for all the expenses are: " + total);
 
             fr.close();
         } catch (Exception e) {
             System.out.println("No expenses found");
-            expensesFound = false;
         }
-        return expensesFound;
+        return total;
+    }
+
+    public double calculateTotalForAllExpensesByMonth(String date) throws IOException {
+
+        String userNameAndPassword = loggedInServiceClass.userCurrentlyLoggedIn();
+
+        String yearSYes = date;
+        String monthSYes = date;
+        StringBuilder yearSb = new StringBuilder(yearSYes);
+        yearSb.setLength(4);
+        yearSYes = yearSb.toString();
+        System.out.println(yearSYes);
+
+        StringBuilder monthSb = new StringBuilder(monthSYes);
+        monthSb.setLength(6);
+        monthSb.deleteCharAt(0);
+        monthSb.deleteCharAt(0);
+        monthSb.deleteCharAt(0);
+        monthSb.deleteCharAt(0);
+        monthSYes = monthSb.toString();
+        System.out.println(monthSYes);
+
+        String path = "src/main/userSpecificFiles/" + userNameAndPassword + "/" + yearSYes + "/" + monthSYes + "/" + "Expenses.json";
+
+        double total = 0;
+        try {
+            FileReader fr = new FileReader(path);
+            expensesJson = new Gson().fromJson(fr, new TypeToken<HashMap<String, Expense>>() {
+            }.getType());
+            if (expensesJson == null) {
+                System.out.println("expensesJson = null"); // test ta bort sen
+
+            } else {
+                System.out.println("expensesJson = not empty"); // test ta bort sen
+                expenses = expensesJson;
+            }
+            for (Expense i : expenses.values()) {
+                total += i.getAmount();
+                System.out.println("Total: " + total); // test purpose
+            }
+            System.out.println("The total for all the expenses are: " + total);
+            fr.close();
+        } catch (Exception e) {
+            System.out.println("No expenses found");
+
+        }
+        return total;
     }
 
 
-
-
-
+    //----------------------------------------------------------------------------------------------------------
 
 
 

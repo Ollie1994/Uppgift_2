@@ -30,11 +30,11 @@ public class UserInputClass {
 
     public int inputMainMenuChoice() {
         int input = 0;
-        while (input <= 0 || input > 16) {
+        while (input <= 0 || input > 20) {
             try {
                 Scanner sc = new Scanner(System.in);
                 input = sc.nextInt();
-                if (input <= 0 || input > 16) {
+                if (input <= 0 || input > 20) {
                     System.out.println("Invalid input!");
                 }
             } catch (Exception e) {

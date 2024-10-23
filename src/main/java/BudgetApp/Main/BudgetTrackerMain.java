@@ -46,12 +46,15 @@ public class BudgetTrackerMain {
 
             while (loggedIn == true) {
                 //MENY 2
-                System.out.println("\nMain Menu\n1. Back to start menu\n2. Display all accounts (test val)\n3. Add an expense" +
+                System.out.println("\nMain Menu\n1. Back to start menu\n2. Display all accounts (test val aka TA BORT)\n3. Add an expense" +
                         "\n4. Display expenses by date\n5. Delete an expense by date\n6. Update an expense by date\n7. Display all expenses" +
-                        "\n8. Search for e specific expense by category and amount\n9. Add an income" +
+                        "\n8. Search for a specific expense by category and amount\n9. Add an income" +
                         "\n10. Display incomes by date\n11. Delete an income by date\n12. Update an income by date" +
-                        "\n13. Display all incomes\n14. Search for e specific income by category and amount" +
-                        "\n15. Calculate total for all expenses\n16. Calculate total for all incomes");
+                        "\n13. Display all incomes\n14. Search for a specific income by category and amount" +
+                        "\n15. Calculate total for all expenses\n16. Calculate total for all incomes" +
+                        "\n17. Calculate total for all expenses by month\n18. Calculate total for all incomes by month" +
+                        "\n19. Calculate total of all incomes minus all expenses" +
+                        "\n20. Calculate total of all incomes minus all expenses per selected month");
 
                 int mainMenu = userInputClass.inputMainMenuChoice(); // skicka in något här som ändra trycatchen till att tilåta flera val
                 switch (mainMenu) {
@@ -59,7 +62,7 @@ public class BudgetTrackerMain {
                         loggedIn = false; // istället för EXIT så loopar vi runt till början igen genom att logga ut?
                         break;
                     case 2:
-                        userServiceClass.displayAccounts(); // bara för admin / test
+                        //userServiceClass.displayAccounts(); // bara för admin / test
                         break;
                     case 3:
                         expenseStorageServiceClass.createExpense();
@@ -107,7 +110,30 @@ public class BudgetTrackerMain {
                     case 16:
                         incomeStorageServiceClass.calculateTotalForAllIncomes();
                         break;
-
+                    case 17:
+                        System.out.println("Enter the year and month of the expenses you would like the total of, (yyyyMM/199408)");
+                        String date3 = userInputClass.inputUsernamePasswordDateChoice();
+                        expenseStorageServiceClass.calculateTotalForAllExpensesByMonth(date3);
+                        break;
+                    case 18:
+                        System.out.println("Enter the year and month of the incomes you would like the total of, (yyyyMM/199408)");
+                        String date4 = userInputClass.inputUsernamePasswordDateChoice();
+                        incomeStorageServiceClass.calculateTotalForAllIncomesByMonth(date4);
+                        break;
+                    case 19:
+                        double incTotal1 = incomeStorageServiceClass.calculateTotalForAllIncomes();
+                        double expTotal1 = expenseStorageServiceClass.calculateTotalForAllExpenses();
+                        double incMinusExp1 = incTotal1 - expTotal1;
+                        System.out.println("The total for all incomes - expenses are: " + incMinusExp1);
+                        break;
+                    case 20:
+                        System.out.println("Enter the year and month of the incomes - expenses you would like the total of, (yyyyMM/199408)");
+                        String date5 = userInputClass.inputUsernamePasswordDateChoice();
+                        double incTotal2 = incomeStorageServiceClass.calculateTotalForAllIncomesByMonth(date5);
+                        double expTotal2 = expenseStorageServiceClass.calculateTotalForAllExpensesByMonth(date5);
+                        double incMinusExp2 = incTotal2 - expTotal2;
+                        System.out.println("The total for incomes - expenses are: " + incMinusExp2);
+                        break;
 
 
 
