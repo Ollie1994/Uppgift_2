@@ -58,7 +58,7 @@ public class BudgetTrackerMain {
                                 "16. Search for a specific income by category and amount\n" +
                                 "17. Calculate total for all expenses by selected month\n" +
                                 "18. Calculate total for all incomes by selected month\n" +
-                                "19. Calculate total of all incomes minus all expenses per selected month" +
+                                "19. Calculate total of all incomes minus all expenses per selected month\n" +
                                 "----------------------------------------------------------------------\n");
 
                 int mainMenu = userInputClass.inputMainMenuChoice(); // skicka in något här som ändra trycatchen till att tilåta flera val

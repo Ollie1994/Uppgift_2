@@ -33,36 +33,17 @@ public class UserServiceClass {
 
     //-----------------------------------------------METHODS--------------------------------------------
 
-
+    // dessa 2 metod under kunde ha gjort snyggare och mindre, den blev lite onödig efter jag fixa en mass annat, och expandera programmet.
     public String createUserSpecificFileForExpenses(String username, String password, LocalDateTime date) throws IOException {
         String pathId = username + password;
         LocalDateTime ldt = date;
         String yearS = ldt.format(DateTimeFormatter.ofPattern("yyyy"));
         String monthS = ldt.format(DateTimeFormatter.ofPattern("MM"));
 
-      /*  StringBuilder yearSb = new StringBuilder(str);
-        yearSb.setLength(4);
-        String yearS = yearSb.toString();
-        System.out.println(yearS);
-
-        System.out.println("STR = " + str);
-        StringBuilder monthSb = new StringBuilder(str);
-        monthSb.deleteCharAt(0);
-        System.out.println(monthSb);
-        monthSb.deleteCharAt(0);
-        System.out.println(monthSb);
-        monthSb.deleteCharAt(0);
-        System.out.println(monthSb);
-        monthSb.deleteCharAt(0);
-        String monthS = monthSb.toString();
-        System.out.println(monthS);
-        */
-        //String pathDate = username + password + str;
-
         File test = new File("src/main/userSpecificFiles/" + pathId + "/" + yearS + "/" + monthS);
         test.mkdirs();
         String path = "src/main/userSpecificFiles/" + pathId + "/" + yearS + "/" + monthS + "/" + "Expenses.json";
-        System.out.println("Path = " + path);
+        //System.out.println("Path = " + path);
         FileWriter fw = new FileWriter(path);
         fw.close();
         return path;
@@ -74,30 +55,17 @@ public class UserServiceClass {
         String yearS = ldt.format(DateTimeFormatter.ofPattern("yyyy"));
         String monthS = ldt.format(DateTimeFormatter.ofPattern("MM"));
 
-        /*
-        StringBuilder yearSb = new StringBuilder(str);
-        yearSb.setLength(4);
-        String yearS = yearSb.toString();
-        System.out.println(yearS);
-
-        StringBuilder monthSb = new StringBuilder(str);
-        monthSb.deleteCharAt(0);
-        monthSb.deleteCharAt(0);
-        monthSb.deleteCharAt(0);
-        monthSb.deleteCharAt(0);
-        String monthS = monthSb.toString();
-        System.out.println(monthS);
-        */
-        //String pathDate = username + password + str;
-
         File test = new File("src/main/userSpecificFiles/" + pathId + "/" + yearS + "/" + monthS);
         test.mkdirs();
         String path = "src/main/userSpecificFiles/" + pathId + "/" + yearS + "/" + monthS + "/" + "Incomes.json";
-        System.out.println("Path = " + path);
+        //System.out.println("Path = " + path);
         FileWriter fw = new FileWriter(path);
         fw.close();
         return path;
     }
+
+
+    //-------------------------------------------------------------------------------------------------------------------------
 
 
     public void createAccount() throws IOException {
@@ -116,15 +84,16 @@ public class UserServiceClass {
             FileReader fr = new FileReader("src/main/users.json");
             usersJson = new Gson().fromJson(fr, new TypeToken<HashMap<String, User>>() {
             }.getType());
+            // if/else under = felhantering ifall json filen är tom
             if (usersJson == null) {
-                System.out.println("usersJson = null"); // test ta bort sen
+                //System.out.println("usersJson = null"); // test ta bort sen
             } else {
-                System.out.println("usersJson = not empty"); // test ta bort sen
+                //System.out.println("usersJson = not empty"); // test ta bort sen
                 users = usersJson;
             }
             fr.close();
         } catch (Exception e) {
-            System.out.println("catch ?");
+            //System.out.println("catch ?");
         }
 
         users.put(str, new User(userName, password));
@@ -138,20 +107,28 @@ public class UserServiceClass {
     public boolean login() throws IOException {
         int i = 0;
         boolean loggedIn = false;
-        while (i < 3 && loggedIn == false) { // 3 test logins tills ool
+        while (i < 3 && loggedIn == false) { // 3 test logins tills back to start menu
             try {
                 i++;
                 System.out.println("Please enter your username");
                 String userName = userInputClass.inputUsernamePasswordDateChoice();
                 System.out.println("Please enter your password");
                 String password = userInputClass.inputUsernamePasswordDateChoice();
+
                 try {
                     FileReader fr = new FileReader("src/main/users.json");
-                    users = new Gson().fromJson(fr, new TypeToken<HashMap<String, User>>() {
+                    usersJson = new Gson().fromJson(fr, new TypeToken<HashMap<String, User>>() {
                     }.getType());
+                    // if/else under = felhantering ifall json filen är tom
+                    if (usersJson == null) {
+                        //System.out.println("usersJson = null"); // test ta bort sen
+                    } else {
+                        //System.out.println("usersJson = not empty"); // test ta bort sen
+                        users = usersJson;
+                    }
                     fr.close();
                 } catch (Exception e) {
-                    System.out.println("catch ?");
+                    //System.out.println("catch ?");
                 }
                 for (User user : users.values()) {
                     if (userName.equals(user.getUserName()) && password.equals(user.getPassword())) {
@@ -159,6 +136,7 @@ public class UserServiceClass {
                         loggedIn = true;
                         loggedInServiceClass.updateUserLoggedIn(userName, password);
                         // WIPEEE MAPS så dem inte håller på att mingla med varandra när jag byter user
+                        // BRILLIANT !! eller inte. ... . vi får seeee
                         expenseStorageServiceClass.expenses.clear();
                         expenseStorageServiceClass.expensesJson.clear();
                         expenseStorageServiceClass.allExpenses.clear();
@@ -176,6 +154,10 @@ public class UserServiceClass {
         return loggedIn;
     }
 
+
+    //--------------------------------------------------------------------------------------------------------------------------
+
+    // ifall jag skulle skapa en admin meny så skulle denna vart med där.
     public void deleteAccount() throws IOException {
         boolean usersFound = displayAccounts();
         if (usersFound) {
@@ -188,19 +170,20 @@ public class UserServiceClass {
         } else {
             System.out.println("No users found");
         }
-    }
-
+    } // jag vet att det skulle vara också en bra ide för usern att kunna ta bort sitt konto men jag fick slut på tid för att implementera det.
+    // ifall jag skulle skapat en admin meny så skulle den udner vabrt med där.
     public boolean displayAccounts() throws IOException { // bara för testing
         boolean usersFound = true;
         try {
             FileReader fr = new FileReader("src/main/users.json");
             usersJson = new Gson().fromJson(fr, new TypeToken<HashMap<String, User>>() {
             }.getType());
+            // if/else under = felhantering ifall json filen är tom
             if (usersJson == null) {
-                System.out.println("usersJson = null"); // test ta bort sen
+                //System.out.println("usersJson = null"); // test ta bort sen
                 usersFound = false;
             } else {
-                System.out.println("usersJson = not empty"); // test ta bort sen
+                //System.out.println("usersJson = not empty"); // test ta bort sen
                 users = usersJson;
             }
             for (String i : users.keySet()) {
