@@ -5,13 +5,13 @@ import BudgetApp.EnumClasses.IncomeCategory;
 
 import java.util.Scanner;
 
-// att ha tryCatchen i en egen klass gör det mycket lättare att återanvända kod-
+// att ha inputten i en egen klass gör det mycket lättare att återanvända kod-
 // och gör det lättare att hålla main så ren som möjligt.
 public class UserInputClass {
 
 
 
-    public int inputStartMenuChoice() {
+    public int inputStartMenuChoice() { // (userinput)start meny valet felhantering
         int input = 0;
         while (input <= 0 || input > 3) {
             try {
@@ -28,13 +28,13 @@ public class UserInputClass {
         return input;
     }
 
-    public int inputMainMenuChoice() {
+    public int inputMainMenuChoice() { //(userinput)huvudmeny felhantering
         int input = 0;
-        while (input <= 0 || input > 20) {
+        while (input <= 0 || input > 19) {
             try {
                 Scanner sc = new Scanner(System.in);
                 input = sc.nextInt();
-                if (input <= 0 || input > 20) {
+                if (input <= 0 || input > 19) {
                     System.out.println("Invalid input!");
                 }
             } catch (Exception e) {
@@ -45,7 +45,7 @@ public class UserInputClass {
         return input;
     }
 
-    public String inputUsernamePasswordDateChoice() {
+    public String inputUsernamePasswordDateChoice() { // (userinput)väldigt använd för det mesta jag beöver en username pass, date  , elelr strign som svar.
         String input = "";
             try {
                 Scanner sc = new Scanner(System.in);
@@ -58,7 +58,7 @@ public class UserInputClass {
             return input;
     }
 
-    public double inputAmountChoice() {
+    public double inputAmountChoice() { //amount double user input + felhantering
         double input = 0;
         while (input <= 0 || input >= Double.MAX_VALUE) {
             try {
@@ -75,7 +75,7 @@ public class UserInputClass {
         return input;
     }
 
-    public String inputEnumCategoryChoice() {
+    public String inputEnumCategoryChoice() { // (userinput)enum kategori val och felhantering
         Scanner sc = new Scanner(System.in);
         ExpenseCategory category_exCa;
         IncomeCategory category_inCa;

@@ -32,7 +32,7 @@ public class ExpenseStorageServiceClass {
     HashMap<String, Expense> allExpenses = new HashMap<String, Expense>();
     HashMap<String, Expense> allExpensesJson = new HashMap<String, Expense>();
 
-
+    // jsonmapsen existerar för att ifall json filen är tom så blir hashmappen oickså null, vilket jag inte visste hur jag skulle lösa
 
 
 
@@ -45,20 +45,21 @@ public class ExpenseStorageServiceClass {
     public void addExpenseToAllExpensesList(String userNameAndPassword, ExpenseCategory category, String date, double amount) throws IOException {
         try {
             FileReader fr = new FileReader("src/main/userSpecificFiles/" + userNameAndPassword + "/" + "allExpenses.json");
-            allExpensesJson = new Gson().fromJson(fr, new TypeToken<HashMap<String, Expense>>() {
+            allExpensesJson = new Gson().fromJson(fr, new TypeToken<HashMap<String, Expense>>() { //hashmappenblirnullfelhanteringifalljsonfil=tom
             }.getType());
+            // if/else under = felhantering ifall json filen är tom
             if (allExpensesJson == null) {
-                System.out.println("allExpensesJson = null"); // test ta bort sen
+                //System.out.println("allExpensesJson = null"); // test ta bort sen
             } else {
-                System.out.println("allExpensesJson = not empty"); // test ta bort sen
-                allExpenses = allExpensesJson;
+                //System.out.println("allExpensesJson = not empty"); // test ta bort sen
+                allExpenses = allExpensesJson; // ifall inte null
             }
             fr.close();
         } catch (Exception e) {
-            System.out.println("catch ?");
+           //System.out.println("catch ?");
         }
         allExpenses.put(date, new Expense(amount, category));
-        System.out.println("You have successfully created a new expense with category " + category + " and amount " + amount);
+        //System.out.println("You have successfully created a new expense with category " + category + " and amount " + amount);
         FileWriter fw = new FileWriter("src/main/userSpecificFiles/" + userNameAndPassword + "/" + "allExpenses.json");
         gson.toJson(allExpenses, fw);
         fw.close();
@@ -69,7 +70,7 @@ public class ExpenseStorageServiceClass {
         String userNameAndPassword = loggedInServiceClass.userCurrentlyLoggedIn();
 
         System.out.println("Pick a category");
-        ExpenseCategory category = ExpenseCategory.valueOf(userInputClass.inputEnumCategoryChoice()); // byt till annan tC
+        ExpenseCategory category = ExpenseCategory.valueOf(userInputClass.inputEnumCategoryChoice());
         System.out.println("Please enter an amount: ");
         double amount = userInputClass.inputAmountChoice();
         LocalDateTime ldt = LocalDateTime.now();
@@ -90,7 +91,7 @@ public class ExpenseStorageServiceClass {
             StringBuilder yearSb = new StringBuilder(yearSYes);
             yearSb.setLength(4);
             yearSYes = yearSb.toString();
-            System.out.println(yearSYes);
+            //System.out.println(yearSYes);
 
             StringBuilder monthSb = new StringBuilder(monthSYes);
             monthSb.setLength(7);
@@ -100,7 +101,9 @@ public class ExpenseStorageServiceClass {
             monthSb.deleteCharAt(0);
             monthSb.deleteCharAt(0);
             monthSYes = monthSb.toString();
-            System.out.println(monthSYes);
+            //System.out.println(monthSYes);
+            // allt detta över är för att översätta input till "usable code" tyyyp,,,, lättare att använda kod
+
 
             System.out.println("You have created this new date: " + createdDate + ", year: " + yearSYes + ", month: " + monthSYes);
 
@@ -126,15 +129,16 @@ public class ExpenseStorageServiceClass {
             FileReader fr = new FileReader(path);
             expensesJson = new Gson().fromJson(fr, new TypeToken<HashMap<String, Expense>>() {
             }.getType());
+            // if/else under = felhantering ifall json filen är tom
             if (expensesJson == null) {
-                System.out.println("expensesJson = null"); // test ta bort sen
+                //System.out.println("expensesJson = null"); // test ta bort sen
             } else {
-                System.out.println("expensesJson = not empty"); // test ta bort sen
+                //System.out.println("expensesJson = not empty"); // test ta bort sen
                 expenses = expensesJson;
             }
             fr.close();
         } catch (Exception e) {
-            System.out.println("catch ?");
+            //System.out.println("catch ?");
         }
 
 
@@ -150,7 +154,7 @@ public class ExpenseStorageServiceClass {
     // ------------------------------------------------------------------------------------------------------------------------------
 
 
-    public boolean displayExpensesByDate(String date) throws IOException { // bara för testing
+    public boolean displayExpensesByDate(String date) throws IOException {
         /*
         System.out.println("Enter your username");
         String username = userInputClass.inputUsernamePasswordDateChoice();
@@ -159,6 +163,8 @@ public class ExpenseStorageServiceClass {
         System.out.println("Enter the year and month of the expenses you would like to checkout, (yyyyMM/199408)");
         String date = userInputClass.inputUsernamePasswordDateChoice();
         */
+
+        // detta över var det som man var tvungen att göra överallt för att linka "user" till exp/incs, men nu fixas det enkelt med metoden under.
         String userNameAndPassword = loggedInServiceClass.userCurrentlyLoggedIn();
 
         String yearSYes = date;
@@ -166,7 +172,7 @@ public class ExpenseStorageServiceClass {
         StringBuilder yearSb = new StringBuilder(yearSYes);
         yearSb.setLength(4);
         yearSYes = yearSb.toString();
-        System.out.println(yearSYes);
+        //System.out.println(yearSYes);
 
         StringBuilder monthSb = new StringBuilder(monthSYes);
         monthSb.setLength(6);
@@ -175,7 +181,8 @@ public class ExpenseStorageServiceClass {
         monthSb.deleteCharAt(0);
         monthSb.deleteCharAt(0);
         monthSYes = monthSb.toString();
-        System.out.println(monthSYes);
+        //System.out.println(monthSYes);
+        // allt detta över är för att översätta input till "usable code" tyyyp,,,, lättare att använda kod
 
         String path = "src/main/userSpecificFiles/" + userNameAndPassword + "/" + yearSYes + "/" + monthSYes + "/" + "Expenses.json";
 
@@ -184,11 +191,12 @@ public class ExpenseStorageServiceClass {
             FileReader fr = new FileReader(path);
             expensesJson = new Gson().fromJson(fr, new TypeToken<HashMap<String, Expense>>() {
             }.getType());
+            // if/else under = felhantering ifall json filen är tom
             if (expensesJson == null) {
-                System.out.println("expensesJson = null"); // test ta bort sen
+                //System.out.println("expensesJson = null"); // test ta bort sen
                 expensesFound = false;
             } else {
-                System.out.println("expensesJson = not empty"); // test ta bort sen
+                //System.out.println("expensesJson = not empty"); // test ta bort sen
                 expenses = expensesJson;
             }
             for (String i : expenses.keySet()) {
@@ -199,12 +207,10 @@ public class ExpenseStorageServiceClass {
             System.out.println("No expenses found");
             expensesFound = false;
         }
-        return expensesFound; // ska returna till remove expenses och ändra expenses
+        return expensesFound; // ska returna till remove expenses och ändra expenses, ifall det inte finns några  att ändra.
     }
 
-    public boolean displayAllExpenses(boolean choice) throws IOException { // bara för testing
-
-
+    public boolean displayAllExpenses(boolean choice) throws IOException {
 
         String userNameAndPassword = loggedInServiceClass.userCurrentlyLoggedIn();
 
@@ -215,11 +221,12 @@ public class ExpenseStorageServiceClass {
             FileReader fr = new FileReader(path);
             allExpensesJson = new Gson().fromJson(fr, new TypeToken<HashMap<String, Expense>>() {
             }.getType());
+            // if/else under = felhantering ifall json filen är tom
             if (allExpensesJson == null) {
-                System.out.println("allExpensesJson = null"); // test ta bort sen
+                //System.out.println("allExpensesJson = null"); // test ta bort sen
                 expensesFound = false;
             } else {
-                System.out.println("allExpensesJson = not empty"); // test ta bort sen
+                //System.out.println("allExpensesJson = not empty"); // test ta bort sen
                 allExpenses = allExpensesJson;
             }
             if (choice) {
@@ -234,7 +241,7 @@ public class ExpenseStorageServiceClass {
             System.out.println("No expenses found");
             expensesFound = false;
         }
-        return expensesFound; // ska returna till remove expenses och ändra expenses
+        return expensesFound; // ska returna till remove expenses och ändra expenses ifall det inte finns några exp
     }
 
 
@@ -247,7 +254,7 @@ public class ExpenseStorageServiceClass {
 
         String path = "src/main/userSpecificFiles/" + userNameAndPassword + "/" + "allExpenses.json";
 
-        boolean expensesFound = displayAllExpenses(false);
+        boolean expensesFound = displayAllExpenses(false); // denna är falsk för vi vill inte visa upp lista, vi vill bara updatera listan ifall det finns att ta bort.
 
         if (expensesFound) {
             allExpenses.remove(date);
@@ -272,7 +279,7 @@ public class ExpenseStorageServiceClass {
         StringBuilder yearSb = new StringBuilder(yearSYes);
         yearSb.setLength(4);
         yearSYes = yearSb.toString();
-        System.out.println(yearSYes);
+        //System.out.println(yearSYes);
 
         StringBuilder monthSb = new StringBuilder(monthSYes);
         monthSb.setLength(6);
@@ -281,11 +288,15 @@ public class ExpenseStorageServiceClass {
         monthSb.deleteCharAt(0);
         monthSb.deleteCharAt(0);
         monthSYes = monthSb.toString();
-        System.out.println(monthSYes);
+        //System.out.println(monthSYes);
+        // allt detta över är för att översätta input till "usable code" tyyyp,,,, lättare att använda kod
+
+
+
 
         String path = "src/main/userSpecificFiles/" + userNameAndPassword + "/" + yearSYes + "/" + monthSYes + "/" + "Expenses.json";
 
-        boolean expensesFound = displayExpensesByDate(date);
+        boolean expensesFound = displayExpensesByDate(date); // felhantering för ifall det inte finns några expenses
 
         if (expensesFound) {
             System.out.println("Type in yyyy-MM-dd HH:mm:ss of expense you want to remove");
@@ -311,7 +322,7 @@ public class ExpenseStorageServiceClass {
 
         String path = "src/main/userSpecificFiles/" + userNameAndPassword + "/" + "allExpenses.json";
 
-        boolean expensesFound = displayAllExpenses(false);
+        boolean expensesFound = displayAllExpenses(false); // "false" bcuz - vi vill bara updatera listan inte visa något
 
         if (expensesFound) {
             allExpenses.remove(oldDate);
@@ -336,7 +347,7 @@ public class ExpenseStorageServiceClass {
         StringBuilder yearSb = new StringBuilder(yearSYes);
         yearSb.setLength(4);
         yearSYes = yearSb.toString();
-        System.out.println(yearSYes);
+        //System.out.println(yearSYes);
 
         StringBuilder monthSb = new StringBuilder(monthSYes);
         monthSb.setLength(6);
@@ -345,7 +356,9 @@ public class ExpenseStorageServiceClass {
         monthSb.deleteCharAt(0);
         monthSb.deleteCharAt(0);
         monthSYes = monthSb.toString();
-        System.out.println(monthSYes);
+        //System.out.println(monthSYes);
+        // allt detta över är för att översätta input till "usable code" tyyyp,,,, lättare att använda kod
+
 
         String path = "src/main/userSpecificFiles/" + userNameAndPassword + "/" + yearSYes + "/" + monthSYes + "/" + "Expenses.json";
 
@@ -362,6 +375,9 @@ public class ExpenseStorageServiceClass {
             ExpenseCategory category = ExpenseCategory.valueOf(userInputClass.inputEnumCategoryChoice()); // byt till annan tC
             System.out.println("Please enter an amount: ");
             double amount = userInputClass.inputAmountChoice();
+
+
+            // allt under är bara ifall man vill ändra datumet på expensen också.
 
             System.out.println("Would you also like to change the date of the expense yes/no? (You can only change it within the month originally set, if you wanna change year or month (delete the expense and create a new custom one)");
             String answer = userInputClass.inputUsernamePasswordDateChoice();
@@ -416,10 +432,11 @@ public class ExpenseStorageServiceClass {
             FileReader fr = new FileReader(path);
             allExpensesJson = new Gson().fromJson(fr, new TypeToken<HashMap<String, Expense>>() {
             }.getType());
+            // if/else under = felhantering ifall json filen är tom
             if (allExpensesJson == null) {
-                System.out.println("allExpensesJson = null"); // test ta bort sen
+                //System.out.println("allExpensesJson = null"); // test ta bort sen
             } else {
-                System.out.println("allExpensesJson = not empty"); // test ta bort sen
+                //System.out.println("allExpensesJson = not empty"); // test ta bort sen
                 allExpenses = allExpensesJson;
             }
             for (Expense i : allExpenses.values()) {
@@ -458,16 +475,17 @@ public class ExpenseStorageServiceClass {
             FileReader fr = new FileReader(path);
             allExpensesJson = new Gson().fromJson(fr, new TypeToken<HashMap<String, Expense>>() {
             }.getType());
+            // if/else under = felhantering ifall json filen är tom
             if (allExpensesJson == null) {
-                System.out.println("allExpensesJson = null"); // test ta bort sen
+                //System.out.println("allExpensesJson = null"); // test ta bort sen
             }
             else {
-                System.out.println("allExpensesJson = not empty"); // test ta bort sen
+                //System.out.println("allExpensesJson = not empty"); // test ta bort sen
                 allExpenses = allExpensesJson;
             }
             for (Expense i : allExpenses.values()) {
                 total += i.getAmount();
-                System.out.println("Total: " + total); // test purpose
+                //System.out.println("Total: " + total); // test purpose
             }
             System.out.println("The total for all the expenses are: " + total);
 
@@ -487,7 +505,7 @@ public class ExpenseStorageServiceClass {
         StringBuilder yearSb = new StringBuilder(yearSYes);
         yearSb.setLength(4);
         yearSYes = yearSb.toString();
-        System.out.println(yearSYes);
+        //System.out.println(yearSYes);
 
         StringBuilder monthSb = new StringBuilder(monthSYes);
         monthSb.setLength(6);
@@ -496,7 +514,9 @@ public class ExpenseStorageServiceClass {
         monthSb.deleteCharAt(0);
         monthSb.deleteCharAt(0);
         monthSYes = monthSb.toString();
-        System.out.println(monthSYes);
+        //System.out.println(monthSYes);
+        // allt detta över är för att översätta input till "usable code" tyyyp,,,, lättare att använda kod
+
 
         String path = "src/main/userSpecificFiles/" + userNameAndPassword + "/" + yearSYes + "/" + monthSYes + "/" + "Expenses.json";
 
@@ -505,16 +525,17 @@ public class ExpenseStorageServiceClass {
             FileReader fr = new FileReader(path);
             expensesJson = new Gson().fromJson(fr, new TypeToken<HashMap<String, Expense>>() {
             }.getType());
+            // if/else under = felhantering ifall json filen är tom
             if (expensesJson == null) {
-                System.out.println("expensesJson = null"); // test ta bort sen
+                //System.out.println("expensesJson = null"); // test ta bort sen
 
             } else {
-                System.out.println("expensesJson = not empty"); // test ta bort sen
+                //System.out.println("expensesJson = not empty"); // test ta bort sen
                 expenses = expensesJson;
             }
             for (Expense i : expenses.values()) {
                 total += i.getAmount();
-                System.out.println("Total: " + total); // test purpose
+                //System.out.println("Total: " + total); // test purpose
             }
             System.out.println("The total for all the expenses are: " + total);
             fr.close();

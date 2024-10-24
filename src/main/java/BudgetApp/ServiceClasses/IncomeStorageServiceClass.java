@@ -49,18 +49,19 @@ public class IncomeStorageServiceClass {
             FileReader fr = new FileReader("src/main/userSpecificFiles/" + userNameAndPassword + "/" + "allIncomes.json");
             allIncomesJson = new Gson().fromJson(fr, new TypeToken<HashMap<String, Income>>() {
             }.getType());
+            // if/else under = felhantering ifall json filen är tom
             if (allIncomesJson == null) {
-                System.out.println("allIncomesJson = null"); // test ta bort sen
+                //System.out.println("allIncomesJson = null"); // test ta bort sen
             } else {
-                System.out.println("allIncomesJson = not empty"); // test ta bort sen
+                //System.out.println("allIncomesJson = not empty"); // test ta bort sen
                 allIncomes = allIncomesJson;
             }
             fr.close();
         } catch (Exception e) {
-            System.out.println("catch ?");
+            //System.out.println("catch ?");
         }
         allIncomes.put(date, new Income(amount, category));
-        System.out.println("You have successfully created a new income with category " + category + " and amount " + amount);
+        //System.out.println("You have successfully created a new income with category " + category + " and amount " + amount);
         FileWriter fw = new FileWriter("src/main/userSpecificFiles/" + userNameAndPassword + "/" + "allIncomes.json");
         gson.toJson(allIncomes, fw);
         fw.close();
@@ -92,7 +93,7 @@ public class IncomeStorageServiceClass {
             StringBuilder yearSb = new StringBuilder(yearSYes);
             yearSb.setLength(4);
             yearSYes = yearSb.toString();
-            System.out.println(yearSYes);
+            //System.out.println(yearSYes);
 
             StringBuilder monthSb = new StringBuilder(monthSYes);
             monthSb.setLength(7);
@@ -102,7 +103,8 @@ public class IncomeStorageServiceClass {
             monthSb.deleteCharAt(0);
             monthSb.deleteCharAt(0);
             monthSYes = monthSb.toString();
-            System.out.println(monthSYes);
+            //System.out.println(monthSYes);
+            // allt detta över är för att översätta input till "usable code" tyyyp,,,, lättare att använda kod
 
             System.out.println("You have created this new date: " + createdDate + ", year: " + yearSYes + ", month: " + monthSYes);
 
@@ -128,15 +130,16 @@ public class IncomeStorageServiceClass {
             FileReader fr = new FileReader(path);
             incomesJson = new Gson().fromJson(fr, new TypeToken<HashMap<String, Income>>() {
             }.getType());
+            // if/else under = felhantering ifall json filen är tom
             if (incomesJson == null) {
-                System.out.println("incomesJson = null"); // test ta bort sen
+                //System.out.println("incomesJson = null"); // test ta bort sen
             } else {
-                System.out.println("incomesJson = not empty"); // test ta bort sen
+                //System.out.println("incomesJson = not empty"); // test ta bort sen
                 incomes = incomesJson;
             }
             fr.close();
         } catch (Exception e) {
-            System.out.println("catch ?");
+            //System.out.println("catch ?");
         }
 
 
@@ -153,14 +156,7 @@ public class IncomeStorageServiceClass {
 
 
     public boolean displayIncomesByDate(String date) throws IOException { // bara för testing
-        /*
-        System.out.println("Enter your username");
-        String username = userInputClass.inputUsernamePasswordDateChoice();
-        System.out.println("Enter your password");
-        String password = userInputClass.inputUsernamePasswordDateChoice();
-        System.out.println("Enter the year and month of the incomes you would like to checkout, (yyyyMM/199408)");
-        String date = userInputClass.inputUsernamePasswordDateChoice();
-        */
+
         String userNameAndPassword = loggedInServiceClass.userCurrentlyLoggedIn();
 
         String yearSYes = date;
@@ -168,7 +164,7 @@ public class IncomeStorageServiceClass {
         StringBuilder yearSb = new StringBuilder(yearSYes);
         yearSb.setLength(4);
         yearSYes = yearSb.toString();
-        System.out.println(yearSYes);
+        //System.out.println(yearSYes);
 
         StringBuilder monthSb = new StringBuilder(monthSYes);
         monthSb.setLength(6);
@@ -177,7 +173,9 @@ public class IncomeStorageServiceClass {
         monthSb.deleteCharAt(0);
         monthSb.deleteCharAt(0);
         monthSYes = monthSb.toString();
-        System.out.println(monthSYes);
+        //System.out.println(monthSYes);
+        // allt detta över är för att översätta input till "usable code" tyyyp,,,, lättare att använda kod
+
 
         String path = "src/main/userSpecificFiles/" + userNameAndPassword + "/" + yearSYes + "/" + monthSYes + "/" + "Incomes.json";
 
@@ -186,11 +184,12 @@ public class IncomeStorageServiceClass {
             FileReader fr = new FileReader(path);
             incomesJson = new Gson().fromJson(fr, new TypeToken<HashMap<String, Income>>() {
             }.getType());
+            // if/else under = felhantering ifall json filen är tom
             if (incomesJson == null) {
-                System.out.println("incomesJson = null"); // test ta bort sen
+                //System.out.println("incomesJson = null"); // test ta bort sen
                 incomesFound = false;
             } else {
-                System.out.println("incomesJson = not empty"); // test ta bort sen
+                //System.out.println("incomesJson = not empty"); // test ta bort sen
                 incomes = incomesJson;
             }
             for (String i : incomes.keySet()) {
@@ -217,11 +216,12 @@ public class IncomeStorageServiceClass {
             FileReader fr = new FileReader(path);
             allIncomesJson = new Gson().fromJson(fr, new TypeToken<HashMap<String, Income>>() {
             }.getType());
+            // if/else under = felhantering ifall json filen är tom
             if (allIncomesJson == null) {
-                System.out.println("allIncomesJson = null"); // test ta bort sen
+                //System.out.println("allIncomesJson = null"); // test ta bort sen
                 incomesFound = false;
             } else {
-                System.out.println("allIncomesJson = not empty"); // test ta bort sen
+                //System.out.println("allIncomesJson = not empty"); // test ta bort sen
                 allIncomes = allIncomesJson;
             }
             if (choice) {
@@ -249,7 +249,7 @@ public class IncomeStorageServiceClass {
 
         String path = "src/main/userSpecificFiles/" + userNameAndPassword + "/" + "allIncomes.json";
 
-        boolean incomesFound = displayAllIncomes(false);
+        boolean incomesFound = displayAllIncomes(false); // vill inte displaya bara kolla ifall finns
 
         if (incomesFound) {
             allIncomes.remove(date);
@@ -267,6 +267,7 @@ public class IncomeStorageServiceClass {
 
 
         System.out.println("Enter the year and month of the income you would like to remove, (yyyyMM/199408)");
+
         String date = userInputClass.inputUsernamePasswordDateChoice();
 
         String yearSYes = date;
@@ -274,7 +275,7 @@ public class IncomeStorageServiceClass {
         StringBuilder yearSb = new StringBuilder(yearSYes);
         yearSb.setLength(4);
         yearSYes = yearSb.toString();
-        System.out.println(yearSYes);
+        //System.out.println(yearSYes);
 
         StringBuilder monthSb = new StringBuilder(monthSYes);
         monthSb.setLength(6);
@@ -283,7 +284,9 @@ public class IncomeStorageServiceClass {
         monthSb.deleteCharAt(0);
         monthSb.deleteCharAt(0);
         monthSYes = monthSb.toString();
-        System.out.println(monthSYes);
+        //System.out.println(monthSYes);
+        // allt detta över är för att översätta input till "usable code" tyyyp,,,, lättare att använda kod
+
 
         String path = "src/main/userSpecificFiles/" + userNameAndPassword + "/" + yearSYes + "/" + monthSYes + "/" + "Incomes.json";
 
@@ -313,7 +316,7 @@ public class IncomeStorageServiceClass {
 
         String path = "src/main/userSpecificFiles/" + userNameAndPassword + "/" + "allIncomes.json";
 
-        boolean incomesFound = displayAllIncomes(false);
+        boolean incomesFound = displayAllIncomes(false); // vill ej display bara kolla ifall finns
 
         if (incomesFound) {
             allIncomes.remove(oldDate);
@@ -338,7 +341,7 @@ public class IncomeStorageServiceClass {
         StringBuilder yearSb = new StringBuilder(yearSYes);
         yearSb.setLength(4);
         yearSYes = yearSb.toString();
-        System.out.println(yearSYes);
+        //System.out.println(yearSYes);
 
         StringBuilder monthSb = new StringBuilder(monthSYes);
         monthSb.setLength(6);
@@ -347,7 +350,8 @@ public class IncomeStorageServiceClass {
         monthSb.deleteCharAt(0);
         monthSb.deleteCharAt(0);
         monthSYes = monthSb.toString();
-        System.out.println(monthSYes);
+        //System.out.println(monthSYes);
+        // allt detta över är för att översätta input till "usable code" tyyyp,,,, lättare att använda kod
 
         String path = "src/main/userSpecificFiles/" + userNameAndPassword + "/" + yearSYes + "/" + monthSYes + "/" + "Incomes.json";
 
@@ -365,6 +369,7 @@ public class IncomeStorageServiceClass {
             System.out.println("Please enter an amount: ");
             double amount = userInputClass.inputAmountChoice();
 
+            // allt under ifall man vill update date också
             System.out.println("Would you also like to change the date of the income yes/no? (You can only change it within the month originally set, if you wanna change year or month (delete the income and create a new custom one)");
             String answer = userInputClass.inputUsernamePasswordDateChoice();
             if (answer.equals("yes")) {
@@ -418,10 +423,11 @@ public class IncomeStorageServiceClass {
             FileReader fr = new FileReader(path);
             allIncomesJson = new Gson().fromJson(fr, new TypeToken<HashMap<String, Income>>() {
             }.getType());
+            // if/else under = felhantering ifall json filen är tom
             if (allIncomesJson == null) {
-                System.out.println("allIncomesJson = null"); // test ta bort sen
+                //System.out.println("allIncomesJson = null"); // test ta bort sen
             } else {
-                System.out.println("allIncomesJson = not empty"); // test ta bort sen
+                //System.out.println("allIncomesJson = not empty"); // test ta bort sen
                 allIncomes = allIncomesJson;
             }
             for (Income i : allIncomes.values()) {
@@ -459,16 +465,17 @@ public class IncomeStorageServiceClass {
             FileReader fr = new FileReader(path);
             allIncomesJson = new Gson().fromJson(fr, new TypeToken<HashMap<String, Income>>() {
             }.getType());
+            // if/else under = felhantering ifall json filen är tom
             if (allIncomesJson == null) {
-                System.out.println("allIncomesJson = null"); // test ta bort sen
+                //System.out.println("allIncomesJson = null"); // test ta bort sen
             }
             else {
-                System.out.println("allIncomesJson = not empty"); // test ta bort sen
+                //System.out.println("allIncomesJson = not empty"); // test ta bort sen
                 allIncomes = allIncomesJson;
             }
             for (Income i : allIncomes.values()) {
                 total += i.getAmount();
-                System.out.println("Total: " + total); // test purpose
+                //System.out.println("Total: " + total); // test purpose
             }
             System.out.println("The total for all the incomes are: " + total);
 
@@ -488,7 +495,7 @@ public class IncomeStorageServiceClass {
         StringBuilder yearSb = new StringBuilder(yearSYes);
         yearSb.setLength(4);
         yearSYes = yearSb.toString();
-        System.out.println(yearSYes);
+        //System.out.println(yearSYes);
 
         StringBuilder monthSb = new StringBuilder(monthSYes);
         monthSb.setLength(6);
@@ -497,7 +504,9 @@ public class IncomeStorageServiceClass {
         monthSb.deleteCharAt(0);
         monthSb.deleteCharAt(0);
         monthSYes = monthSb.toString();
-        System.out.println(monthSYes);
+        //System.out.println(monthSYes);
+        // allt detta över är för att översätta input till "usable code" tyyyp,,,, lättare att använda kod
+
 
         String path = "src/main/userSpecificFiles/" + userNameAndPassword + "/" + yearSYes + "/" + monthSYes + "/" + "Incomes.json";
 
@@ -506,15 +515,16 @@ public class IncomeStorageServiceClass {
             FileReader fr = new FileReader(path);
             incomesJson = new Gson().fromJson(fr, new TypeToken<HashMap<String, Income>>() {
             }.getType());
+            // if/else under = felhantering ifall json filen är tom
             if (incomesJson == null) {
-                System.out.println("incomesJson = null"); // test ta bort sen
+                //System.out.println("incomesJson = null"); // test ta bort sen
             } else {
-                System.out.println("incomesJson = not empty"); // test ta bort sen
+                //System.out.println("incomesJson = not empty"); // test ta bort sen
                 incomes = incomesJson;
             }
             for (Income i : incomes.values()) {
                 total += i.getAmount();
-                System.out.println("Total: " + total); // test purpose
+                //System.out.println("Total: " + total); // test purpose
             }
             System.out.println("The total for all the incomes are: " + total);
             fr.close();
