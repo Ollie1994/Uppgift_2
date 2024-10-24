@@ -3,9 +3,10 @@ package BudgetApp.TemplateClasses;
 public class User {
 
    // private String name;
-   // private String lastName; // FRÅGA HELENA
-    private String userName; // optional
-    private String password; // optional ifall vi lägger till logga in
+   // private String lastName;
+    private String userName;
+    private String password;
+    // använda username + password istället för name + lastname för det verkade mer "riktigt" och användbart. plus det påvisar samma kunskaper endå.
 
 
 
