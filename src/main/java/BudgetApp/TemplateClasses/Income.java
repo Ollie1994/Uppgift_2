@@ -13,7 +13,7 @@ public class Income extends Transaction {
 
 
     @Override
-    public String toString() {
+    public String toString() { // tror detta är en typ av compile-time polyformism
         return "Income\n- Category: " + category + "\n- Amount: " + getAmount();
     }
 

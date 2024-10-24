@@ -29,6 +29,9 @@ public class IncomeStorageServiceClass {
     Gson gson = new GsonBuilder().setPrettyPrinting().create();
     LoggedInServiceClass loggedInServiceClass = new LoggedInServiceClass();
 
+    // inte riktigt 100 men jag tror ifall jag hade gjort som "raden under" så hade det också varit polly
+    // Hashmap<String, Transaction> incomes = new Hashmap<String, income>();
+
     HashMap<String, Income> incomes = new HashMap<String, Income>();
     HashMap<String, Income> incomesJson = new HashMap<String, Income>();
     HashMap<String, Income> allIncomes = new HashMap<String, Income>();
@@ -39,10 +42,12 @@ public class IncomeStorageServiceClass {
 
 
 
-
+    // typ varje gång jag gör något med en "income" så använder jag saker från trans.
+    // en inc är en trans
 
     //------------------ METHODS ---------------------------------------------------------------
 
+    // jag tror att varje gång jag skapar ett nytt object så använder jag variablen "amount" från trans vilket ajg tror är en form av polllyformism
 
     public void addIncomeToAllIncomesList(String userNameAndPassword, IncomeCategory category, String date, double amount) throws IOException {
         try {

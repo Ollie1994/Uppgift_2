@@ -12,7 +12,7 @@ public class Expense extends Transaction {
     }
 
     @Override
-    public String toString() {
+    public String toString() { // tror detta är en typ av compile-time polyformism
         return "Expense\n- Category: " + category + "\n- Amount: " + getAmount();
     }
 

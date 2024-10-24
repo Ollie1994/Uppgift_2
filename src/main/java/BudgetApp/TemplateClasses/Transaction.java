@@ -12,7 +12,7 @@ public class Transaction {
     }
 
     @Override
-    public String toString() {
+    public String toString() { // tror detta är en typ av compile-time polyformism
         return "Transaction{" +
                 "amount=" + amount +
                 '}';

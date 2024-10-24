@@ -27,6 +27,9 @@ public class ExpenseStorageServiceClass {
     Gson gson = new GsonBuilder().setPrettyPrinting().create();
     LoggedInServiceClass loggedInServiceClass = new LoggedInServiceClass();
 
+    // inte riktigt 100 men jag tror ifall jag hade gjort som "raden under" så hade det också varit polly
+    // Hashmap<String, Transaction> expenses = new Hashmap<String, Expense>();
+
     HashMap<String, Expense> expenses = new HashMap<String, Expense>();
     HashMap<String, Expense> expensesJson = new HashMap<String, Expense>();
     HashMap<String, Expense> allExpenses = new HashMap<String, Expense>();
@@ -37,11 +40,12 @@ public class ExpenseStorageServiceClass {
 
 
 
-
+    // typ varje gång jag gör något med en "expense" så använder jag saker från trans.
+    // en exp är en trans
 
     //------------------ METHODS ---------------------------------------------------------------
 
-
+    // jag tror att varje gång jag skapar ett nytt object så använder jag variabeln "amount" från trans vilket ajg tror är en form av polllyformism
     public void addExpenseToAllExpensesList(String userNameAndPassword, ExpenseCategory category, String date, double amount) throws IOException {
         try {
             FileReader fr = new FileReader("src/main/userSpecificFiles/" + userNameAndPassword + "/" + "allExpenses.json");
