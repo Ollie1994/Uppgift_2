@@ -75,9 +75,9 @@ public class IncomeStorageServiceClass {
     public void createIncome() throws IOException {
 
         String userNameAndPassword = loggedInServiceClass.userCurrentlyLoggedIn();
-
+        String incomeC = "income";
         System.out.println("Pick a category");
-        IncomeCategory category = IncomeCategory.valueOf(userInputClass.inputEnumCategoryChoice()); // byt till annan tC
+        IncomeCategory category = IncomeCategory.valueOf(userInputClass.inputEnumCategoryChoice(incomeC)); // byt till annan tC
         System.out.println("Please enter an amount: ");
         double amount = userInputClass.inputAmountChoice();
         LocalDateTime ldt = LocalDateTime.now();
@@ -337,7 +337,7 @@ public class IncomeStorageServiceClass {
     public void updateAnIncomeByDate() throws IOException {
 
         String userNameAndPassword = loggedInServiceClass.userCurrentlyLoggedIn();
-
+        String incomeC = "income";
         System.out.println("Enter the year and month of the income you would like to update, (yyyyMM/199408)");
         String date = userInputClass.inputUsernamePasswordDateChoice();
 
@@ -370,7 +370,7 @@ public class IncomeStorageServiceClass {
             oldDate = incomeToBeUpdated;
             newDate = oldDate;
             System.out.println("Pick a category");
-            IncomeCategory category = IncomeCategory.valueOf(userInputClass.inputEnumCategoryChoice()); // byt till annan tC
+            IncomeCategory category = IncomeCategory.valueOf(userInputClass.inputEnumCategoryChoice(incomeC)); // byt till annan tC
             System.out.println("Please enter an amount: ");
             double amount = userInputClass.inputAmountChoice();
 
@@ -414,9 +414,9 @@ public class IncomeStorageServiceClass {
 
 
     public void searchForSpecificIncomeByCategoryAndAmount() throws IOException {
-
+        String incomeC = "income";
         System.out.println("whats the category of the income you want to search for");
-        IncomeCategory category = IncomeCategory.valueOf(userInputClass.inputEnumCategoryChoice());
+        IncomeCategory category = IncomeCategory.valueOf(userInputClass.inputEnumCategoryChoice(incomeC));
         System.out.println("whats the amount of the income you want to search for");
         double amount = userInputClass.inputAmountChoice();
 

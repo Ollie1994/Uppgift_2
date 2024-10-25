@@ -4,19 +4,23 @@
     "amount": 333.0
   },
   "2024-10-17 16:08:17": {
-    "category": "OTHER",
-    "amount": 12345.0
+    "category": "INSURANCE",
+    "amount": 300.0
   },
   "2024-10-17 16:52:46": {
     "category": "SAVINGS",
     "amount": 10.0
+  },
+  "2024-10-25 13:41:00": {
+    "category": "GIFTS",
+    "amount": 10000.0
   },
   "2024-10-13 12:11:10": {
     "category": "RECREATION",
     "amount": 1120.0
   },
   "2024-10-17 17:12:08": {
-    "category": "HOUSING",
-    "amount": 98765.0
+    "category": "PETS",
+    "amount": 777.0
   }
 }

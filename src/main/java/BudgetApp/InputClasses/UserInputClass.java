@@ -75,15 +75,17 @@ public class UserInputClass {
         return input;
     }
 
-    public String inputEnumCategoryChoice() { // (userinput)enum kategori val och felhantering
+    public String inputEnumCategoryChoice(String choice) { // (userinput)enum kategori val och felhantering
         Scanner sc = new Scanner(System.in);
         ExpenseCategory category_exCa;
         IncomeCategory category_inCa;
         String finalCategory = null;
         while (finalCategory == null) {
             try {
-                System.out.println("please type in the type of category you want (expense/income)?");
-                String choice = sc.next();
+                // koden under skapade ett problem om man valde tex expense när man försökte skapa en inc.
+                // nu istället så tar metoden emot en (String choice) istället som säger om det ska vara en exp eller inc
+               // System.out.println("please type in the type of category you want (expense/income)?");
+               // String choice = sc.next();
                 switch (choice) {
                     case "expense":
                         for (ExpenseCategory category : ExpenseCategory.values()) {

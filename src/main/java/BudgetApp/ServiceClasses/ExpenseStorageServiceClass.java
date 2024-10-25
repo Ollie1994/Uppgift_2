@@ -72,9 +72,9 @@ public class ExpenseStorageServiceClass {
     public void createExpense() throws IOException {
 
         String userNameAndPassword = loggedInServiceClass.userCurrentlyLoggedIn();
-
+        String expenseC = "expense";
         System.out.println("Pick a category");
-        ExpenseCategory category = ExpenseCategory.valueOf(userInputClass.inputEnumCategoryChoice());
+        ExpenseCategory category = ExpenseCategory.valueOf(userInputClass.inputEnumCategoryChoice(expenseC));
         System.out.println("Please enter an amount: ");
         double amount = userInputClass.inputAmountChoice();
         LocalDateTime ldt = LocalDateTime.now();
@@ -342,7 +342,7 @@ public class ExpenseStorageServiceClass {
     public void updateAnExpenseByDate() throws IOException {
 
         String userNameAndPassword = loggedInServiceClass.userCurrentlyLoggedIn();
-
+        String expenseC = "expense";
         System.out.println("Enter the year and month of the expense you would like to update, (yyyyMM/199408)");
         String date = userInputClass.inputUsernamePasswordDateChoice();
 
@@ -376,7 +376,7 @@ public class ExpenseStorageServiceClass {
             oldDate = expenseToBeUpdated;
             newDate = oldDate;
             System.out.println("Pick a category");
-            ExpenseCategory category = ExpenseCategory.valueOf(userInputClass.inputEnumCategoryChoice()); // byt till annan tC
+            ExpenseCategory category = ExpenseCategory.valueOf(userInputClass.inputEnumCategoryChoice(expenseC)); // byt till annan tC
             System.out.println("Please enter an amount: ");
             double amount = userInputClass.inputAmountChoice();
 
@@ -422,9 +422,9 @@ public class ExpenseStorageServiceClass {
 
 
     public void searchForSpecificExpenseByCategoryAndAmount() throws IOException {
-
+        String expenseC = "expense";
         System.out.println("whats the category of the expense you want to search for");
-        ExpenseCategory category = ExpenseCategory.valueOf(userInputClass.inputEnumCategoryChoice());
+        ExpenseCategory category = ExpenseCategory.valueOf(userInputClass.inputEnumCategoryChoice(expenseC));
         System.out.println("whats the amount of the expense you want to search for");
         double amount = userInputClass.inputAmountChoice();
 
