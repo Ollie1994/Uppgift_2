@@ -21,7 +21,7 @@ public class BudgetTrackerMain {
             System.out.println("Start Menu\n1. Exit\n2. Login\n3. Create a new account");
             int startMenu = userInputClass.inputStartMenuChoice();
             switch (startMenu) {
-                case 1:
+                case 1: // avslutar appen
                     System.exit(0);
                     break;
                 case 2:
@@ -37,7 +37,7 @@ public class BudgetTrackerMain {
                 //MENY 2
                 System.out.println(
                         "\nMain Menu\n" +
-                                "1. Back to start menu\n" +
+                                "1. Back to start menu (LogOut)\n" +
                                 "----------------------------------------------------------------------\n" +
                                 "2. Add an expense\n" +
                                 "3. Add an income\n" +
@@ -63,7 +63,7 @@ public class BudgetTrackerMain {
 
                 int mainMenu = userInputClass.inputMainMenuChoice(); // skicka in något här som ändra trycatchen till att tilåta flera val
                 switch (mainMenu) {
-                    case 1:
+                    case 1: // typ loggout - tillbaka till start menyn
                         loggedIn = false; // istället för EXIT så loopar vi runt till början igen genom att logga ut.
                         break;
                     case 2:
@@ -112,7 +112,7 @@ public class BudgetTrackerMain {
                     case 14:
                         incomeStorageServiceClass.updateAnIncomeByDate();
                         break;
-                    case 15:
+                    case 15: // i denna och 16 så söker du för en trans(exp,inc) genom att skriva in kategori och amount, sedan får du också datumet utskrivet.
                         expenseStorageServiceClass.searchForSpecificExpenseByCategoryAndAmount();
                         break;
                     case 16:

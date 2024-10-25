@@ -37,10 +37,13 @@ public class IncomeStorageServiceClass {
     HashMap<String, Income> allIncomes = new HashMap<String, Income>();
     HashMap<String, Income> allIncomesJson = new HashMap<String, Income>();
 
+    // jsonmapsen existerar för att ifall json filen är tom så blir hashmappen oickså null, vilket jag inte visste hur jag skulle lösa
 
 
-
-
+    /* varje metod som har All i sig är istorsett för att förenkla när jag vill jobba med ALLA exp eller inc, och ifall jag tar bort -
+    något från 202410, så måste jag också ta bort något från allExenses/Incs. vilket gör att nästan varje metod behöver en -
+    metod som hanterar ALL jsonFilen.
+    */
 
     // typ varje gång jag gör något med en "income" så använder jag saker från trans.
     // en inc är en trans
