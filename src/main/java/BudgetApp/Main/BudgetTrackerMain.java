@@ -54,7 +54,7 @@ public class BudgetTrackerMain {
                                 "12. Delete an income by date\n" +
                                 "13. Update an expense by date\n" +
                                 "14. Update an income by date\n" +
-                                "15. Search for a specific expense by category and amount\n" +
+                                "15. Search for a specific expense by category and amount\n" + // <--- det är häftigt då jag kan ha samma category och amount i JSON filen. och ifall jag har två exakt samma så kommer den visa båda med olika datum. FOOD, 2222 under User22
                                 "16. Search for a specific income by category and amount\n" +
                                 "17. Calculate total for all expenses by selected month\n" +
                                 "18. Calculate total for all incomes by selected month\n" +

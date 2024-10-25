@@ -56,7 +56,7 @@ public class UserInputClass {
             } finally {
             }
             return input;
-    }
+    } // det går tekniskt sett när man skapar ett custom date att skriva 2023-66-66 osv. men det är tydligt i sout vad jag är ute efter
 
     public double inputAmountChoice() { //amount double user input + felhantering
         double input = 0;
